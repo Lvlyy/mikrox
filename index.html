@@ -32,36 +32,52 @@
     </script>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
         :root {
             --bg-color: #ffffff;
-            --text-color: #2c3e50;
+            --text-color: #333333; /* Daha koyu, okunabilir bir gri */
             --container-bg: #ffffff;
-            --option-bg: #f8f9fa;
-            --option-border: #e9ecef;
-            --primary-color: #3498db;
-            --secondary-color: #7f8c8d;
-            --correct-color: #d4efdf;
-            --wrong-color: #fadbd8;
-            --progress-bg: #ecf0f1;
-            --button-hover: #2980b9;
+            --container-gradient-start: #f8f9fa; /* Container için açık renk gradyan başlangıcı */
+            --container-gradient-end: #ffffff;   /* Container için beyaz gradyan bitişi */
+            --option-bg: #ffffff; /* Şıklar için beyaz arka plan */
+            --option-border: #dee2e6; /* Biraz daha belirgin */
+            --primary-color: #007BFF; /* Yeni ana renk */
+            --primary-gradient-start: #007BFF;
+            --primary-gradient-end: #0056b3;
+            --secondary-color: #6c757d; /* Bootstrap secondary */
+            --correct-color: #d1e7dd; /* Bootstrap success bg-subtle */
+            --wrong-color: #f8d7da;   /* Bootstrap danger bg-subtle */
+            --progress-bg: #e9ecef;
+            --button-hover: #0056b3; /* Yeni hover rengi */
+            --shadow-color: rgba(0, 0, 0, 0.075); /* Yumuşak gölge rengi */
+            --input-bg: #fff;
+            --input-border: #ced4da;
         }
 
         [data-theme="dark"] {
-            --bg-color: #1a1a1a;
-            --text-color: #ffffff;
-            --container-bg: #2d2d2d;
-            --option-bg: #3d3d3d;
-            --option-border: #4d4d4d;
-            --primary-color: #2980b9;
-            --secondary-color: #95a5a6;
-            --correct-color: #194d33;
-            --wrong-color: #4d1a1a;
+            --bg-color: #121212; /* Daha koyu bir arka plan */
+            --text-color: #e0e0e0; /* Açık gri metin */
+            --container-bg: #1e1e1e; /* Hafifçe daha açık container */
+            --container-gradient-start: #232323; /* Koyu tema container gradyan */
+            --container-gradient-end: #1e1e1e;
+            --option-bg: #2c2c2c;
+            --option-border: #444444;
+            --primary-color: #007BFF; /* Koyu modda da aynı ana renk, belki biraz daha canlı? Şimdilik aynı */
+            --primary-gradient-start: #007BFF;
+            --primary-gradient-end: #0062cc; /* Koyu tema için gradyan sonu biraz daha canlı */
+            --secondary-color: #adb5bd;
+            --correct-color: #143620; /* Daha koyu yeşil */
+            --wrong-color: #4d1a1a; /* Mevcut */
             --progress-bg: #333333;
-            --button-hover: #1a5276;
+            --button-hover: #0056b3; /* Koyu mod için de uygun */
+            --shadow-color: rgba(255, 255, 255, 0.05); /* Açık renk gölge */
+            --input-bg: #2c2c2c;
+            --input-border: #555;
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', Arial, sans-serif; /* Yeni font */
             margin: 0;
             padding: 20px;
             background-color: var(--bg-color);
@@ -71,11 +87,12 @@
 
         .container {
             max-width: 800px;
-            margin: 0 auto;
-            background: var(--container-bg);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            /* background: var(--container-bg); */ /* Düz renk yerine gradyan */
+            background-image: linear-gradient(to bottom, var(--container-gradient-start), var(--container-gradient-end));
+            padding: 35px; /* Padding biraz artırıldı */
+            border-radius: 18px; /* Daha yuvarlak kenarlar */
+            box-shadow: 0 10px 30px var(--shadow-color); /* Gölge biraz daha belirgin */
             transition: all 0.3s ease;
         }
 
@@ -91,7 +108,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px var(--shadow-color); /* Yeni yumuşak gölge */
             z-index: 1000;
             transition: all 0.3s ease;
         }
@@ -146,10 +163,13 @@
             border: none;
             border-radius: 8px;
             font-size: 16px;
+            font-weight: 500; /* Font ağırlığı eklendi */
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--primary-color);
+            transition: all 0.2s ease-out; /* Geçiş yumuşatıldı */
+            /* background: var(--primary-color); */ /* Düz renk yerine gradyan */
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
             color: white;
+            box-shadow: 0 4px 15px rgba(0,123,255,0.2); /* Butonlara varsayılan hafif gölge */
         }
 
         .mode-btn {
@@ -157,17 +177,45 @@
         }
 
         .mode-btn:hover, .name-continue-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(52,152,219,0.4);
-            background: var(--button-hover);
+            transform: translateY(-3px); /* Hover efekti biraz daha belirgin */
+            box-shadow: 0 7px 20px rgba(0,123,255,0.35); 
+            /* background: var(--button-hover); */ /* Eski hover */
         }
 
         .fast-mode {
-            background: #e67e22 !important;
+            background: #ffc107 !important; 
+            color: #212529 !important; /* Daha koyu metin */
+            box-shadow: 0 4px 15px rgba(255,193,7,0.2);
         }
         
         .fast-mode:hover {
-            background: #d35400 !important;
+            background: #e0a800 !important; 
+            box-shadow: 0 7px 20px rgba(255,193,7,0.35);
+            transform: translateY(-3px);
+        }
+
+        .normal-mode-btn-green {
+            background-image: linear-gradient(to right, #28a745, #218838) !important; /* Bootstrap success green gradient */
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(40,167,69,0.2);
+        }
+
+        .normal-mode-btn-green:hover {
+            background-image: linear-gradient(to right, #218838, #1e7e34) !important; /* Darker green for hover */
+            box-shadow: 0 7px 20px rgba(40,167,69,0.35);
+            transform: translateY(-3px);
+        }
+
+        .sterilization-mode-btn {
+            background: #dc3545 !important; /* Bootstrap danger color */
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(220,53,69,0.2);
+        }
+
+        .sterilization-mode-btn:hover {
+            background: #c82333 !important; /* Darker red for hover */
+            box-shadow: 0 7px 20px rgba(220,53,69,0.35);
+            transform: translateY(-3px);
         }
 
         .question {
@@ -182,19 +230,22 @@
         }
 
         .option {
-            padding: 15px;
-            margin: 12px 0;
+            padding: 18px 20px; /* İç boşluk artırıldı */
+            margin: 15px 0; /* Dış boşluk artırıldı */
             background: var(--option-bg);
-            border: 2px solid var(--option-border);
-            border-radius: 8px;
+            border: 1px solid var(--option-border);
+            border-radius: 12px; /* Daha yuvarlak kenarlar */
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Daha yumuşak ve elastik geçiş */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Hafif kart gölgesi */
         }
 
         .option:hover {
-            transform: translateX(10px);
-            background: var(--primary-color);
+            transform: translateY(-4px) scale(1.02); /* Yükselme efekti */
+            background: var(--primary-gradient-start); /* Ana rengin gradyan başlangıcı */
             color: white;
+            border-color: transparent; /* Hoverda kenarlığı kaldır */
+            box-shadow: 0 8px 20px rgba(0,123,255,0.3); /* Hoverda belirgin gölge */
         }
 
         .option.correct {
@@ -232,21 +283,29 @@
         }
 
         #prevBtn {
-            background: var(--secondary-color);
+            /* background: var(--secondary-color); */
+            background-image: linear-gradient(to right, var(--secondary-color), #5a6268);
             color: white;
+            box-shadow: 0 4px 15px rgba(108,117,125,0.2);
         }
 
         #prevBtn:hover {
-            background: var(--button-hover);
+            /* background: #5a6268; */
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(108,117,125,0.35);
         }
 
         #nextBtn {
-            background: var(--primary-color);
+            /* background: var(--primary-color); */
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
             color: white;
+            box-shadow: 0 4px 15px rgba(0,123,255,0.2);
         }
 
         #nextBtn:hover {
-            background: var(--button-hover);
+            /* background: var(--button-hover); */
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0,123,255,0.35);
         }
 
         .next-btn-disabled {
@@ -266,7 +325,8 @@
         }
 
         .restart-btn {
-            background: #2ecc71;
+            /* background: #198754; */
+            background-image: linear-gradient(to right, #198754, #146c43 ); /* Yeşil gradyan */
             color: white;
             font-size: 18px;
             padding: 15px 50px;
@@ -274,20 +334,27 @@
         }
 
         .restart-btn:hover {
-            transform: scale(1.05);
-            background: #27ae60;
+            transform: translateY(-3px) scale(1.03);
+            /* background: #157347; */
+            box-shadow: 0 7px 20px rgba(25,135,84,0.35);
         }
 
         .name-input {
             padding: 12px 20px;
             font-size: 16px;
-            border: 2px solid var(--option-border);
+            border: 1px solid var(--input-border); /* Kenarlık güncellendi */
             border-radius: 8px;
             width: 80%;
             max-width: 400px;
             margin: 20px 0;
-            background: var(--option-bg);
+            background: var(--input-bg);
             color: var(--text-color);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .name-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* Bootstrap focus shadow */
         }
 
         .scoreboard {
@@ -370,18 +437,27 @@
         }
 
         /* Admin Panel Stilleri */
-        .admin-panel {
-            position: fixed;
-            bottom: 50px;
-            left: 20px;
-            background: #e74c3c;
-            color: white;
-            padding: 15px;
+        .admin-screen { /* Yeni admin ekranı için genel stil */
+            text-align: center;
+            padding: 40px 20px; /* Diğer ekranlarla benzer padding */
+            display: none; /* Başlangıçta gizli */
+        }
+
+        .admin-panel { /* Eski .admin-panel, artık .admin-screen içinde bir container */
+            /* position: fixed; KALDURULDU */
+            /* bottom: 50px; KALDURULDU */
+            /* left: 20px; KALDURULDU */
+            background: var(--container-bg); /* Ana container arka planını kullanabilir */
+            color: var(--text-color);
+            padding: 25px;
             border-radius: 8px;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            width: 250px;
+            /* display: none; KALDURULDU, çünkü üst .admin-screen gizleyecek */
+            /* z-index: 1000; KALDURULDU */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Hafif gölge */
+            width: 100%; /* Genişliği parent'a göre ayarla */
+            max-width: 600px; /* Maksimum genişlik */
+            margin: 0 auto; /* Ortala */
+            text-align: left; /* İçeriği sola hizala */
         }
 
         .admin-toggle {
@@ -400,31 +476,44 @@
             justify-content: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             z-index: 1001;
+            padding: 20px;
         }
 
         .admin-btn {
-            background: #c0392b;
+            /* background: var(--primary-color); */
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
             color: white;
             border: none;
             border-radius: 5px;
-            padding: 8px 15px;
-            margin: 5px 0;
+            padding: 10px 18px; /* Padding ayarlandı */
+            margin: 8px 0; /* Margin ayarlandı */
             cursor: pointer;
             width: 100%;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-out;
+            font-weight: 500;
         }
 
         .admin-btn:hover {
-            background: #a5281b;
+            /* background: var(--button-hover); */
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0,123,255,0.35);
         }
 
         .admin-input {
-            padding: 8px 12px;
+            padding: 10px 15px; /* Padding ayarlandı */
             margin: 10px 0;
-            width: 100%;
-            border: none;
+            width: calc(100% - 30px); /* Padding hesaba katıldı */
+            border: 1px solid var(--input-border);
             border-radius: 5px;
-            font-size: 14px;
+            font-size: 15px; /* Font boyutu ayarlandı */
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .admin-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
         }
 
         .admin-title {
@@ -471,17 +560,126 @@
                 font-size: 16px;
             }
             
-            .admin-panel {
+            /* .admin-panel eski mobil stilleri kaldırıldı/ayarlanacak */
+            /* .admin-panel {
                 width: 200px;
                 left: 10px;
                 bottom: 60px;
-            }
+            } */
+        }
+
+        .admin-subtitle {
+            margin-top: 0;
+            margin-bottom: 15px; 
+            font-size: 1.15em; 
+            color: var(--primary-color); 
+            border-bottom: 1px solid var(--option-border); 
+            padding-bottom: 5px; 
+        }
+        #dynamicQuestionCount {
+            color: var(--secondary-color);
+            font-weight: normal;
+        }
+
+        /* Admin panelinde soru listesindeki resim önizlemesi */
+        .question-image-preview-admin {
+            margin-top: 5px;
+            margin-bottom: 8px;
+        }
+        .question-image-preview-admin img {
+            max-width: 100px; /* Önizleme için küçük boyut */
+            max-height: 75px;
+            border-radius: 4px;
+            border: 1px solid var(--option-border);
+            object-fit: cover; /* Resmin oranını koruyarak sığdır */
+        }
+
+        /* Quiz ekranındaki soru resmi için stil */
+        #questionImageContainer {
+            display: none;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        #questionImage {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Logout butonu için özel stil (admin panel içinde) */
+        #adminControls #logoutBtn {
+            /* background-color: var(--secondary-color) !important; */
+            background-image: linear-gradient(to right, var(--secondary-color), #5a6268) !important;
+            box-shadow: 0 4px 15px rgba(108,117,125,0.2) !important;
+        }
+        #adminControls #logoutBtn:hover {
+            /* background-color: #5a6268 !important; */
+            box-shadow: 0 7px 20px rgba(108,117,125,0.35) !important;
+            transform: translateY(-3px) !important;
+        }
+
+        /* Soru silme butonu için özel stil (admin panel içinde) */
+        .delete-question-btn {
+            /* background-color: #dc3545 !important; */
+            background-image: linear-gradient(to right, #dc3545, #c82333) !important;
+            color: white !important;
+            padding: 6px 12px !important;
+            font-size: 0.85em !important;
+            width: auto !important;
+            display: inline-block;
+            margin-top: 8px;
+            border-radius: 5px !important;
+        }
+        .delete-question-btn:hover {
+            /* background-color: #bb2d3b !important; */
+            box-shadow: 0 6px 15px rgba(220,53,69,0.35) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        .edit-question-btn {
+            background-image: linear-gradient(to right, #007bff, #0056b3) !important; /* Primary blue gradient */
+            color: white !important;
+            padding: 6px 12px !important;
+            font-size: 0.85em !important;
+            width: auto !important;
+            display: inline-block;
+            margin-top: 8px;
+            margin-right: 5px; /* Add some space between edit and delete buttons */
+            border-radius: 5px !important;
+        }
+        .edit-question-btn:hover {
+            box-shadow: 0 6px 15px rgba(0,123,255,0.35) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Icon Animations */
+        .icon-rotate-hover:hover {
+            transform: rotate(360deg);
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .icon-wiggle {
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+
+        @keyframes jiggle {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+        .icon-jiggle-hover:hover {
+            animation: jiggle 0.3s ease-in-out;
         }
     </style>
 </head>
 <body>
-    <button class="restart-game-btn" id="restartGameBtn">↻</button>
-    <button class="theme-toggle" id="themeToggle">🌓</button>
+    <button class="restart-game-btn" id="restartGameBtn">🔄</button>
+    <button class="theme-toggle icon-rotate-hover" id="themeToggle">🌓</button>
     <button class="sound-toggle" id="soundToggle">🔊</button>
     
     <div class="container">
@@ -498,9 +696,10 @@
         <div class="mode-screen" id="modeScreen">
             <h1 class="mode-title">Mikro Show Bilgi Yarışması</h1>
             <div class="mode-buttons-container">
-                <button class="mode-btn" id="normalModeBtn">Sıralı Mod</button>
+                <button class="mode-btn normal-mode-btn-green" id="normalModeBtn">Sıralı Mod</button>
                 <button class="mode-btn" id="shuffledModeBtn">Karışık Mod</button>
                 <button class="mode-btn fast-mode" id="fastModeBtn">10x Hızlı Mod</button>
+                <button class="mode-btn sterilization-mode-btn" id="sterilizationModeBtn">Sterilizasyon Mod</button>
             </div>
         </div>
 
@@ -508,6 +707,9 @@
         <div class="quiz-screen" id="quizScreen">
             <div class="progress-container">
                 <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div id="questionImageContainer">
+                <img id="questionImage" alt="Soru Görseli">
             </div>
             <div class="question" id="question"></div>
             <div class="options-container" id="options"></div>
@@ -542,867 +744,1389 @@
             
             <button class="restart-btn" id="restartBtn">Yeniden Başlat</button>
         </div>
+
+        <!-- 5. Admin Ekranı (Yeni) -->
+        <div class="admin-screen" id="adminScreen" style="display: none;">
+            <div class="admin-panel" id="adminPanel"> <!-- Eski adminPanel div'i buraya taşındı -->
+                <h3 class="admin-title">Admin Paneli</h3>
+                <input type="password" class="admin-input" id="adminPassword" placeholder="Admin Şifresi">
+                <button class="admin-btn" id="adminLoginBtn">Giriş Yap</button>
+                <div id="adminControls" style="display: none;">
+                    <!-- Dinamik admin kontrolleri (butonlar, formlar) buraya setupAdminPanel tarafından eklenecek -->
+                </div>
+            </div>
+        </div>
+
     </div>
     
-    <!-- Admin Paneli -->
-    <div class="admin-panel" id="adminPanel">
-        <h3 class="admin-title">Admin Paneli</h3>
-        <input type="password" class="admin-input" id="adminPassword" placeholder="Admin Şifresi">
-        <button class="admin-btn" id="adminLoginBtn">Giriş Yap</button>
-        <div id="adminControls" style="display: none;">
-            <button class="admin-btn" id="clearScoresBtn">Skorları Temizle</button>
-            <button class="admin-btn" id="logoutBtn">Çıkış Yap</button>
-        </div>
-    </div>
+    <!-- Admin Paneli Toggle Butonu (Sabit kalacak) -->
     <button class="admin-toggle" id="adminToggle">🔒</button>
     
     <div class="debug-console" id="debugConsole"></div>
     <button class="debug-toggle" id="debugToggle">Debug</button>
 
     <script>
-        // HATA AYIKLAMA SİSTEMİ
-        const debugConsole = document.getElementById('debugConsole');
-        const debugToggle = document.getElementById('debugToggle');
+        // --- BEGIN QUALITY IMPROVEMENT: CONSTANTS & DOM ELEMENTS ---
+        const CONSTANTS = {
+            SCREEN_NAMES: {
+                NAME: 'name',
+                MODE: 'mode',
+                QUIZ: 'quiz',
+                RESULT: 'result',
+                ADMIN: 'admin' // Yeni admin ekranı adı
+            },
+            LOCAL_STORAGE_KEYS: {
+                THEME: 'theme',
+                SOUND_ENABLED: 'soundEnabled'
+            },
+            ADMIN_PASSWORD_VALUE: "tuna",
+            SOUND_FILES: {
+                CORRECT: 'https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3',
+                WRONG: 'https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3',
+                COMPLETE: 'https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3'
+            },
+            CSS_CLASSES: {
+                ACTIVE_SCREEN: 'active-screen',
+                DISABLED: 'disabled',
+                CORRECT: 'correct',
+                WRONG: 'wrong',
+                NEXT_BTN_DISABLED: 'next-btn-disabled',
+                SHAKE_ANIMATION: 'shake-animation',
+                CURRENT_PLAYER: 'current-player',
+                OPTION: 'option'
+            },
+            MODES: {
+                NORMAL: 'normal',
+                SHUFFLED: 'shuffled',
+                FAST: 'fast',
+                STERILIZATION: 'sterilization' // Yeni mod eklendi
+            },
+            UI_TEXT: {
+                NEXT: 'İleri',
+                FINISH: 'Bitir',
+                SOUND_ON: '🔊',
+                SOUND_OFF: '🔇',
+                DEBUG_ON_MESSAGE: 'Debug mod açıldı',
+                DEBUG_OFF_MESSAGE: 'Debug mod kapatıldı',
+                ERROR_PREFIX: 'HATA: ',
+                SUCCESS_PREFIX: 'BAŞARI: ',
+                SAVING_NAME_ERROR: 'İsim kaydedilirken hata oluştu: ',
+                SCREEN_CHANGE_ERROR: 'Ekran değiştirilirken hata oluştu: ',
+                QUIZ_START_ERROR: 'Quiz başlatılırken hata oluştu: ',
+                QUESTION_LOAD_ERROR: 'Soru yüklenirken hata oluştu: ',
+                ANSWER_SELECT_ERROR: 'Cevap seçilirken hata oluştu: ',
+                SHOW_RESULTS_ERROR: 'Sonuçlar gösterilirken hata oluştu: ',
+                SCOREBOARD_LOAD_ERROR: 'Skor tablosu yüklenirken hata oluştu!',
+                CLEAR_SCORES_ERROR: 'Skorlar temizlenirken hata oluştu: ',
+                SETTINGS_LOAD_ERROR: 'Ayarlar yüklenemedi:',
+                INVALID_NAME_ERROR: 'Lütfen bir isim girin!',
+                INVALID_PASSWORD_ERROR: 'Hatalı şifre!',
+                CONFIRM_RESET_GAME: 'Oyunu sıfırlamak istediğinize emin misiniz?',
+                CONFIRM_CLEAR_SCORES: 'Tüm skorları temizlemek istediğinize emin misiniz?',
+                CONFIRM_DELETE_QUESTION: 'Bu soruyu kalıcı olarak silmek istediğinize emin misiniz?',
+                UNKNOWN_DATE: 'Bilinmeyen Tarih',
+                SOUND_PLAY_ERROR: 'Ses çalınamadı: ',
+                NO_QUESTIONS_FOUND: 'Hiç soru bulunamadı! Lütfen admin panelinden soru ekleyin.',
+                NO_DYNAMIC_QUESTIONS: 'Firebase\'de kayıtlı soru bulunmuyor.',
+                QUESTION_ADDED_SUCCESS: 'Soru başarıyla eklendi!',
+                QUESTION_DELETED_SUCCESS: 'Soru başarıyla silindi.',
+                QUESTION_ADD_ERROR: 'Soru eklenirken hata: ',
+                QUESTION_DELETE_ERROR: 'Soru silinirken hata oluştu: ',
+                LOADING_DYNAMIC_QUESTIONS_ERROR: 'Dinamik sorular Firebase\'den yüklenirken hata oluştu: ',
+                DYNAMIC_QUESTIONS_LOADED: 'adet dinamik soru Firebase\'den yüklendi.',
+                NO_DYNAMIC_QUESTIONS_IN_DB: 'Firebase\'de kayıtlı dinamik soru bulunamadı.',
+                ADD_QUESTION_EMPTY_TEXT: 'Soru metni boş olamaz.',
+                ADD_QUESTION_EMPTY_OPTIONS: 'Tüm seçenekler doldurulmalıdır.',
+                ADD_QUESTION_INVALID_ANSWER: 'Geçerli bir doğru cevap seçilmelidir.',
+                SAVING_QUESTION_TEXT: 'Kaydediliyor...',
+                QUESTION_UPDATED_SUCCESS: 'Soru başarıyla güncellendi!', // Yeni eklendi
+                QUESTION_UPDATE_ERROR: 'Soru güncellenirken hata: ' // Yeni eklendi
+            },
+            ELEMENT_IDS: {
+                DEBUG_CONSOLE: 'debugConsole',
+                DEBUG_TOGGLE: 'debugToggle',
+                ERROR_MESSAGE: 'errorMessage',
+                NAME_SCREEN: 'nameScreen',
+                MODE_SCREEN: 'modeScreen',
+                QUIZ_SCREEN: 'quizScreen',
+                RESULT_SCREEN: 'resultScreen',
+                ADMIN_SCREEN: 'adminScreen',
+                QUESTION_IMAGE_CONTAINER: 'questionImageContainer',
+                QUESTION_IMAGE: 'questionImage',
+                RESTART_GAME_BTN: 'restartGameBtn',
+                THEME_TOGGLE: 'themeToggle',
+                SOUND_TOGGLE: 'soundToggle',
+                PLAYER_NAME_INPUT: 'playerNameInput',
+                CONTINUE_BTN: 'continueBtn',
+                NORMAL_MODE_BTN: 'normalModeBtn',
+                SHUFFLED_MODE_BTN: 'shuffledModeBtn',
+                FAST_MODE_BTN: 'fastModeBtn',
+                PROGRESS_BAR: 'progressBar',
+                QUESTION: 'question',
+                OPTIONS: 'options',
+                PREV_BTN: 'prevBtn',
+                NEXT_BTN: 'nextBtn',
+                SCORE_TEXT: 'scoreText',
+                LOADING_SCORES: 'loadingScores',
+                SCOREBOARD_BODY: 'scoreboardBody',
+                RESTART_BTN: 'restartBtn',
+                ADMIN_PANEL: 'adminPanel',
+                ADMIN_PASSWORD: 'adminPassword',
+                ADMIN_LOGIN_BTN: 'adminLoginBtn',
+                ADMIN_CONTROLS: 'adminControls',
+                CLEAR_SCORES_BTN: 'clearScoresBtn',
+                LOGOUT_BTN: 'logoutBtn',
+                ADMIN_TOGGLE: 'adminToggle',
+                ADD_QUESTION_FORM: 'addQuestionForm',
+                NEW_QUESTION_TEXT: 'newQuestionText',
+                NEW_OPTION_1: 'newOption1',
+                NEW_OPTION_2: 'newOption2',
+                NEW_OPTION_3: 'newOption3',
+                NEW_OPTION_4: 'newOption4',
+                NEW_CORRECT_ANSWER_INDEX: 'newCorrectAnswerIndex',
+                NEW_QUESTION_IMAGE_URL: 'newQuestionImageUrl',
+                SAVE_QUESTION_BTN: 'saveQuestionBtn',
+                ADD_QUESTION_STATUS: 'addQuestionStatus',
+                EXISTING_QUESTIONS_SECTION: 'existingQuestionsSection',
+                EXISTING_QUESTIONS_LIST: 'existingQuestionsList',
+                STERILIZATION_MODE_BTN: 'sterilizationModeBtn' // Yeni buton ID'si eklendi
+            }
+        };
+
+        const domElements = {
+            html: document.documentElement,
+            debugConsole: document.getElementById(CONSTANTS.ELEMENT_IDS.DEBUG_CONSOLE),
+            debugToggle: document.getElementById(CONSTANTS.ELEMENT_IDS.DEBUG_TOGGLE),
+            errorMessage: document.getElementById(CONSTANTS.ELEMENT_IDS.ERROR_MESSAGE),
+            nameScreen: document.getElementById(CONSTANTS.ELEMENT_IDS.NAME_SCREEN),
+            modeScreen: document.getElementById(CONSTANTS.ELEMENT_IDS.MODE_SCREEN),
+            quizScreen: document.getElementById(CONSTANTS.ELEMENT_IDS.QUIZ_SCREEN),
+            resultScreen: document.getElementById(CONSTANTS.ELEMENT_IDS.RESULT_SCREEN),
+            adminScreen: null,
+            questionImageContainer: null,
+            questionImage: null,
+            restartGameBtn: document.getElementById(CONSTANTS.ELEMENT_IDS.RESTART_GAME_BTN),
+            themeToggle: document.getElementById(CONSTANTS.ELEMENT_IDS.THEME_TOGGLE),
+            soundToggle: document.getElementById(CONSTANTS.ELEMENT_IDS.SOUND_TOGGLE),
+            playerNameInput: document.getElementById(CONSTANTS.ELEMENT_IDS.PLAYER_NAME_INPUT),
+            continueBtn: document.getElementById(CONSTANTS.ELEMENT_IDS.CONTINUE_BTN),
+            normalModeBtn: document.getElementById(CONSTANTS.ELEMENT_IDS.NORMAL_MODE_BTN),
+            shuffledModeBtn: document.getElementById(CONSTANTS.ELEMENT_IDS.SHUFFLED_MODE_BTN),
+            fastModeBtn: document.getElementById(CONSTANTS.ELEMENT_IDS.FAST_MODE_BTN),
+            progressBar: document.getElementById(CONSTANTS.ELEMENT_IDS.PROGRESS_BAR),
+            question: document.getElementById(CONSTANTS.ELEMENT_IDS.QUESTION),
+            options: document.getElementById(CONSTANTS.ELEMENT_IDS.OPTIONS),
+            prevBtn: document.getElementById(CONSTANTS.ELEMENT_IDS.PREV_BTN),
+            nextBtn: document.getElementById(CONSTANTS.ELEMENT_IDS.NEXT_BTN),
+            scoreText: document.getElementById(CONSTANTS.ELEMENT_IDS.SCORE_TEXT),
+            loadingScores: document.getElementById(CONSTANTS.ELEMENT_IDS.LOADING_SCORES),
+            scoreboardBody: document.getElementById(CONSTANTS.ELEMENT_IDS.SCOREBOARD_BODY),
+            restartBtn: document.getElementById(CONSTANTS.ELEMENT_IDS.RESTART_BTN),
+            adminPanel: document.getElementById(CONSTANTS.ELEMENT_IDS.ADMIN_PANEL),
+            adminPasswordInput: document.getElementById(CONSTANTS.ELEMENT_IDS.ADMIN_PASSWORD),
+            adminLoginBtn: document.getElementById(CONSTANTS.ELEMENT_IDS.ADMIN_LOGIN_BTN),
+            adminControls: document.getElementById(CONSTANTS.ELEMENT_IDS.ADMIN_CONTROLS),
+            adminToggle: document.getElementById(CONSTANTS.ELEMENT_IDS.ADMIN_TOGGLE),
+            clearScoresBtn: null,
+            logoutBtn: null,
+            addQuestionForm: null,
+            newQuestionText: null,
+            newOption1: null,
+            newOption2: null,
+            newOption3: null,
+            newOption4: null,
+            newCorrectAnswerIndex: null,
+            saveQuestionBtn: null,
+            addQuestionStatus: null,
+            newQuestionImageUrl: null,
+            existingQuestionsSection: null,
+            existingQuestionsList: null,
+            sterilizationModeBtn: null // Yeni buton için placeholder eklendi
+        };
+        // --- END QUALITY IMPROVEMENT: CONSTANTS & DOM ELEMENTS ---
+
+        // HATA AYIKLAMA VE GERİ BİLDİRİM SİSTEMİ
         let debugMode = true;
-        
+
         function logDebug(message) {
-            if(!debugMode) return;
+            if (!debugMode) return;
             const timestamp = new Date().toLocaleTimeString();
-            debugConsole.innerHTML += `[${timestamp}] ${message}<br>`;
-            debugConsole.scrollTop = debugConsole.scrollHeight;
+            domElements.debugConsole.innerHTML += `[${timestamp}] ${message}<br>`;
+            domElements.debugConsole.scrollTop = domElements.debugConsole.scrollHeight;
             console.log(message);
         }
-        
-        function showError(message) {
-            const errorDiv = document.getElementById('errorMessage');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-            logDebug(`HATA: ${message}`);
-            
+
+        function showFeedback(message, type = 'error') { 
+            if (!domElements.errorMessage) return;
+            domElements.errorMessage.textContent = message;
+            domElements.errorMessage.style.display = 'block';
+            if (type === 'error') {
+                domElements.errorMessage.style.backgroundColor = '#fadbd8';
+                domElements.errorMessage.style.color = '#e74c3c';
+                logDebug(`${CONSTANTS.UI_TEXT.ERROR_PREFIX}${message}`);
+            } else if (type === 'success') {
+                domElements.errorMessage.style.backgroundColor = '#d4efdf';
+                domElements.errorMessage.style.color = '#198754';
+                logDebug(`${CONSTANTS.UI_TEXT.SUCCESS_PREFIX}${message}`);
+            }
+
             setTimeout(() => {
-                errorDiv.style.display = 'none';
+                if (domElements.errorMessage) domElements.errorMessage.style.display = 'none';
             }, 5000);
         }
         
-        debugToggle.addEventListener('click', () => {
+        domElements.debugToggle.addEventListener('click', () => {
             debugMode = !debugMode;
-            debugConsole.style.display = debugMode ? 'block' : 'none';
-            logDebug(`Debug mod ${debugMode ? 'açıldı' : 'kapatıldı'}`);
+            domElements.debugConsole.style.display = debugMode ? 'block' : 'none';
+            logDebug(debugMode ? CONSTANTS.UI_TEXT.DEBUG_ON_MESSAGE : CONSTANTS.UI_TEXT.DEBUG_OFF_MESSAGE);
         });
 
         // UYGULAMA DEĞİŞKENLERİ
         const screens = {
-            name: document.getElementById('nameScreen'),
-            mode: document.getElementById('modeScreen'),
-            quiz: document.getElementById('quizScreen'),
-            result: document.getElementById('resultScreen')
+            [CONSTANTS.SCREEN_NAMES.NAME]: domElements.nameScreen,
+            [CONSTANTS.SCREEN_NAMES.MODE]: domElements.modeScreen,
+            [CONSTANTS.SCREEN_NAMES.QUIZ]: domElements.quizScreen,
+            [CONSTANTS.SCREEN_NAMES.RESULT]: domElements.resultScreen,
+            [CONSTANTS.SCREEN_NAMES.ADMIN]: null // domElements.adminScreen initApp içinde atanacak
         };
         
         let questions = [];
         let currentQuestionIndex = 0;
         let userAnswers = {};
         let playerName = "";
-        let scores = [];
         let soundEnabled = true;
         let currentMode = "";
         let currentPlayerScoreId = null;
         let isAdmin = false;
-        const ADMIN_PASSWORD = "mikroshow123";
+        let editingQuestionId = null; // ID of the question being edited, null if adding new
 
-        // SORU BANKASI 
+        // SORU BANKASI (Statik sorular)
         const originalQuestions = [
-            // Soru 1
-        {
-            question: "Kendi kendine oluşma kuramının Latincesi nedir?",
-            options: ["Generatio spontanea", "Spontan jenerasyon", "Autoformatio", "Organismus"],
-            answer: "Spontan jenerasyon"
-        },
-        // Soru 2
-        {
-            question: "Metrenin milyonda biri olan uzunluk ölçüsü nedir?",
-            options: ["Mikrometre", "Nanometre", "Angstrom", "Femtometre"],
-            answer: "Mikrometre"
-        },
-        // Soru 3-10
-        {
-            question: "Metrenin milyarda biri olan uzunluk ölçüsü nedir?",
-            options: ["Mikrometre", "Nanometre", "Angstrom", "Femtometre"],
-            answer: "Nanometre"
-        },
-        {
-            question: "Aşağıdakilerden hangisi doğru isimlendirilmiştir?",
-            options: ["Vibrio Cholerae", "Vibrio cholerae", "vibrio Cholerae", "VİBRİO CHOLERAE"],
-            answer: "Vibrio cholerae"
-        },
-        {
-            question: "Nanometrenin onda biri olan uzunluk ölçüsünün ismi nedir?",
-            options: ["Angstrom", "Femtometre", "Micron", "Picometre"],
-            answer: "Angstrom"
-        },
-        {
-            question: "Bakteriler ortalama ne kadar büyüktürler?",
-            options: ["1-2 Mikrometre", "2-3 Mikrometre", "4-5 Mikrometre", "6-7 Mikrometre"],
-            answer: "2-3 Mikrometre"
-        },
-        {
-            question: "Aşağıda verilenleri küçükten büyüğe doğru sıralayınız. Bakteriler, Virüsler, Ricketsia, Lenfosit",
-            options: ["B, C, A, D", "A, B, C, D", "C, D, A, B", "D, A, C, B"],
-            answer: "B, C, A, D"
-        },
-        {
-            question: "Mantarlar ökaryotik, klorofilsiz, ………..la beslenen canlılardır.",
-            options: ["Fagositoz", "Absorbsiyon", "Fotosentez", "Difüzyon"],
-            answer: "Absorbsiyon"
-        },
-        {
-            question: "Protozoon, Alg, Mantarlar, Lenfosit, virüs ve riketsiya’dan hangisi ökaryotik, klorofilsiz ve absorbsiyonla beslenmektedir?",
-            options: ["Mantarlar", "Protozoon", "Alg", "Virüs"],
-            answer: "Mantarlar"
-        },
-        {
-            question: "Özellikle amip türü protozoonlar için karekteristik olan ökaryotlarda gözüken fakat prokaryotik hücrelerde gözükmeyen hareket türü nedir?",
-            options: ["Amaboid hareket", "Sil hareketi", "Flagella hareketi", "Pseudopod hareketi"],
-            answer: "Amaboid hareket"
-        },
-				// Soru 11
-        {
-            question: "Bakterilerde protein sentezini hangi organel yapar?",
-            options: ["Ribozom", "Mitokondri", "Kloroplast", "Lizozom"],
-            answer: "Ribozom"
-        },
-        // Soru 12
-        {
-            question: "Bakterilerde mitokondrinin fonksiyonlarını hangi organel yerine getirmektedir?",
-            options: ["Mesozomlar", "Ribozom", "Golgi aygıtı", "Peroksizom"],
-            answer: "Mesozomlar"
-        },
-        // Soru 13
-        {
-            question: "Ökaryotlardan alglerde olan, prokaryotik hücrelerde olmayan fotosentez işlevi yapan organelin ismi nedir?",
-            options: ["Kloroplast", "Mitokondri", "Ribozom", "Peroksizom"],
-            answer: "Kloroplast"
-        },
-        // Soru 14
-        {
-            question: "Sayı bakımından ökaryotlarda birden fazla olan, prokaryotlarda bir tane olan yapıların ismi nedir?",
-            options: ["Kromozom", "Plazmid", "Ribozom", "Mitokondri"],
-            answer: "Kromozom"
-        },
-        // Soru 15
-        {
-            question: "Hangi organel ökaryotlarda 80S, prokaryotlarda 70S'tir?",
-            options: ["Ribozom", "Mitokondri", "Kloroplast", "Peroksizom"],
-            answer: "Ribozom"
-        },
-        // Soru 16
-        {
-            question: "Ökaryotların yüzeyinde bulunan ve hareketinde işlev gören çok sayıdaki sil uzantılara ne denir?",
-            options: ["Sil", "Flagella", "Pseudopod", "Fimbria"],
-            answer: "Sil"
-        },
-        // Soru 17
-        {
-            question: "Tek bir mikroorganizmayı ifade eden “tür”ün Latincesi nedir?",
-            options: ["Species", "Genus", "Class", "Phylum"],
-            answer: "Species"
-        },
-        // Soru 18
-        {
-            question: "Amiplerin hareket şeklinin ismi nedir?",
-            options: ["Amaboid hareket", "Flagellum hareketi", "Sil hareketi", "Pseudopod hareketi"],
-            answer: "Amaboid hareket"
-        },
-        // Soru 19
-        {
-            question: "Bakterilerin çoğalma şekli nedir?",
-            options: ["Basit ikiye bölünme", "Sporlanma", "Meyozis", "Bölünme"],
-            answer: "Basit ikiye bölünme"
-        },
-        // Soru 20
-        {
-            question: "Bölünmeden sonra koklar birbirlerinden ayrı düşerlerse bunlara ne denir?",
-            options: ["Micrococcus", "Bacillus", "Streptococcus", "Escherichia"],
-            answer: "Micrococcus"
-        },
-				// Soru 21
-        {
-            question: "Bölünme düzlemi birbirine dik olacak şekilde arka arkaya 3 bölünme gerçekleşerek oluşan 8 hücrelik bakteri paketine ne denir?",
-            options: ["Sarsin", "Streptococcus", "Coccus", "Staphylococcus"],
-            answer: "Sarsin"
-        },
-        // Soru 22
-        {
-            question: "Çomak biçiminde bakterilere ne denir?",
-            options: ["Basil", "Coccus", "Spirochete", "Vibrio"],
-            answer: "Basil"
-        },
-        // Soru 23
-        {
-            question: "Koklara benzer biçimdeki basillere ne denir?",
-            options: ["Kokobasil", "Cocobacillus", "Streptobacillus", "Staphylobacillus"],
-            answer: "Kokobasil"
-        },
-        // Soru 24
-        {
-            question: "Bir veya iki uçları bazen de ortaları şişmiş görünümde olan çubuk şeklindeki bakterilere ne denir?",
-            options: ["Difteroid", "Basil", "Kokobasil", "Spiroket"],
-            answer: "Difteroid"
-        },
-        // Soru 25
-        {
-            question: "Sert vücutlu kıvrılmayan sarmal şekilli bakterilere ne denir?",
-            options: ["Spiril-Vibriyo", "Spiral", "Spiroket", "Helicoid"],
-            answer: "Spiril-Vibriyo"
-        },
-        // Soru 26
-        {
-            question: "Sert vücutlu virgüle benzeyen adeta kıvrık çomakçık şeklinde olan, hareketleri kirpikle sağlanan bakterilere görünüm bakımından ne denir?",
-            options: ["Vibriyo", "Spiroket", "Basil", "Flagellum"],
-            answer: "Vibriyo"
-        },
-        // Soru 27
-        {
-            question: "Prokaryotik hücre içinde genetik materyalin tamamını veya çoğunu içeren düzensiz şekilli bir bölgedir. Bu bölgeye ne denir?",
-            options: ["Nükleoid", "Kromozom", "Plazmid", "Golgi Aygıtı"],
-            answer: "Nükleoid"
-        },
-        // Soru 28
-        {
-            question: "Difteri ve buna benzer bazı basillerde bulunan ……………. ya da babes ernst granülleri özel boyama yöntemleri ile boyanabilirler.(Neisser boyası).",
-            options: ["Metakromatik", "Granüler", "Kristalli", "Sümer"],
-            answer: "Metakromatik"
-        },
-        // Soru 29
-        {
-            question: "Sitoplâzma içerisinde birçok bakterilerde bulunan bir oluşumdur. Sitoplâzma içerisinde hücre DNA’sından ayrı olan ve ayrı bölünen bir yapıdır.",
-            options: ["Plazmidler", "Ribozom", "Kloroplast", "Mitokondri"],
-            answer: "Plazmidler"
-        },
-        // Soru 30
-        {
-            question: "Prokaryotik mikroorganizmalarda DNA‘nın oluşumu için gerekli proteinlerin bulunduğu yer neresidir?",
-            options: ["Sitoplazmik zarın mezozomlarıdır", "Plazmid", "Nükleoid", "Ribozom"],
-            answer: "Sitoplazmik zarın mezozomlarıdır"
-        },
-				// Soru 31
-        {
-            question: "Gram negatif bakteriler gram boyaması sonunda ne renkte gözükürler?",
-            options: ["Pembe", "Mavi", "Yeşil", "Sarı"],
-            answer: "Pembe"
-        },
-        // Soru 32
-        {
-            question: "Gram pozitif bakteriler gram boyaması sonunda ne renkte gözükürler?",
-            options: ["Mor", "Pembe", "Yeşil", "Sarı"],
-            answer: "Mor"
-        },
-        // Soru 33
-        {
-            question: "…………= bakteri hücresi çeperine yapışmak zorunda bulunan virüslerden korumaktadır.",
-            options: ["Kapsül", "Plazmid", "Spor", "Flagella"],
-            answer: "Kapsül"
-        },
-        // Soru 34
-        {
-            question: "Kapsüllü bakteriler genellikle ………. Görünümlü koloniler yaparlar ve virulandırlar.",
-            options: ["Mukoit", "Parlak", "Beyaz", "Sarı"],
-            answer: "Mukoit"
-        },
-        // Soru 35
-        {
-            question: "Mikroorganizmaların oksijene doğru hareket etmesine ne denmektedir?",
-            options: ["Aerotaksis", "Kemotaksis", "Fotonaksis", "Mekhanotaksis"],
-            answer: "Aerotaksis"
-        },
-        // Soru 36
-        {
-            question: "Mikroorganizmaların kimyasal bir uyarana doğru hareket etmesine ne denmektedir?",
-            options: ["Kemotaksis", "Aerotaksis", "Magnetotaksis", "Geotaksis"],
-            answer: "Kemotaksis"
-        },
-        // Soru 37
-        {
-            question: "Hücrenin su alarak şişip parçalanmasına ne denir?",
-            options: ["Deplazmoliz", "Plazmoliz", "Osmotik şişme", "Bölünme"],
-            answer: "Deplazmoliz"
-        },
-        // Soru 38
-        {
-            question: "Sitokrom ve solunum enzimleri bakterilerde hangi organellerde bulunur?",
-            options: ["Hücre Zarı", "Mitokondri", "Kloroplast", "Ribozom"],
-            answer: "Hücre Zarı"
-        },
-        // Soru 39
-        {
-            question: "Ozmotik basıncın ayarlanması bakterilerin hangi organeli tarafından düzenlenmektedir?",
-            options: ["Hücre Zarı", "Mitokondri", "Plazmid", "Flagella"],
-            answer: "Hücre Zarı"
-        },
-        // Soru 40
-        {
-            question: "Gram olumsuz bakterilerde peptidoglycan katmanının dışında üç polimer katmandan birisinin ismini yazınız.",
-            options: ["Lipoprotein-Dis Zar-Lipopolisakkari", "Poli-Nükleik Asit", "Lipopolimer", "Polimeraz Enzimi"],
-            answer: "Lipoprotein-Dis Zar-Lipopolisakkari"
-        },
-        // Soru 41
-        {
-            question: "Mycoplasma cinsi bakterilerde bulunmayan hücre organeli nedir?",
-            options: ["Hücre Çeperi", "Ribozom", "Flagella", "Kloroplast"],
-            answer: "Hücre Çeperi"
-        },
-        // Soru 42
-        {
-            question: "Gram (-) ve (+) bakterilerde çeperin sağlamlık ve direncini veren bir katmanın ismi nedir?",
-            options: ["Peptidoglycan", "Lipid katman", "Proteozom", "Periplazmik alan"],
-            answer: "Peptidoglycan"
-        },
-        // Soru 43
-        {
-            question: "Gram (-) bakterilerin hücre çeperinde bulunan lipo protein katmanında belirli enzimlerin işlev yaptığı aralığın ismi nedir?",
-            options: ["Periplazmik aralık", "Peritoplasm", "Metaplazma", "Peyer's Plakları"],
-            answer: "Periplazmik aralık"
-        },
-        // Soru 44
-        {
-            question: "Hücre çeperi= Gram olumsuz bakterilerde bu katman ince olup …….. asit bulunmaz.",
-            options: ["Teichoic", "Lipopolisakkarit", "Lipoprotein", "Peptidoglikan"],
-            answer: "Teichoic"
-        },
-        // Soru 45
-        {
-            question: "Kapsül bazı bakterilerde fibrinlerin oluşturduğu gevsek bir ağ şeklindedir. Buna ne denir?",
-            options: ["Glikokaliks", "Lipoprotein", "Sitrik Asit", "Glikozaminoglikan"],
-            answer: "Glikokaliks"
-        },
-        // Soru 46
-        {
-            question: "Kapsül, Bacillus anthracis türü bakterilerde ne yapısındadır?",
-            options: ["D-Glutamik asit", "Teichoic asit", "Liposakkarit", "Sitrik asit"],
-            answer: "D-Glutamik asit"
-        },
-        // Soru 47
-        {
-            question: "Streptococcus pyogenes’in kapsülü ne yapıdadır?",
-            options: ["Hiyalüronik", "Polisakkarit", "Teichoic", "Asetilkolin"],
-            answer: "Hiyalüronik"
-        },
-        // Soru 48
-        {
-            question: "Bakterilerin salgıladıkları maddelerden yapılmış olan bakterileri saran genellikle polisakkarit yapısındaki yapılara ne denir?",
-            options: ["Kapsül", "Flagella", "Spor", "Biofilm"],
-            answer: "Kapsül"
-        },
-        // Soru 49
-        {
-            question: "Flagellin adı verilen çok ince esnek birimlerden yapılmış bakteri organeline ne denmektedir?",
-            options: ["Kirpik-Kamçı", "Spor", "Kapsül", "Plazmid"],
-            answer: "Kirpik-Kamçı"
-        },
-        // Soru 50
-        {
-            question: "Kirpikler; Sitoplazma içerisindeki başlangıç noktasına ne denmektedir?",
-            options: ["Baz-Gran-Bleof", "Bazal cisim", "Kapsül başlangıcı", "Kromozom"],
-            answer: "Baz-Gran-Bleof"
-        },
-        // Soru 51
-        {
-            question: "Kirpiksiz bakterilere ne denir?",
-            options: ["Atrichia", "Atrichous", "Cocci", "Basillus"],
-            answer: "Atrichia"
-        },
-        // Soru 52
-        {
-            question: "Kirpikler sitoplazma içerisine giren bir ………. ……… den (blefaroplast) başlangıç alırlar.",
-            options: ["Bazal Granül", "Ribozom", "Flagella", "Bakteri Kapsülü"],
-            answer: "Bazal Granül"
-        },
-        // Soru 53
-        {
-            question: "Kirpikler sitoplazma içerisine giren bir bazal granülden (……………) başlangıç alırlar.",
-            options: ["Blefaroplast", "Plazmid", "Nükleoid", "Kapsül"],
-            answer: "Blefaroplast"
-        },
-        // Soru 54
-        {
-            question: "Kirpikleri meydana getiren, proteinden yapılmış çok ince ve esnek birimlere ne denmektedir?",
-            options: ["Flagellin", "Flagella", "Kirpikler", "Fimbria"],
-            answer: "Flagellin"
-        },
-        // Soru 55
-        {
-            question: "Bakterilerin hareket organelinin ismi nedir?",
-            options: ["Kirpik-Kamçı", "Flagella", "Pilus", "Fimbria"],
-            answer: "Kirpik-Kamçı"
-        },
-        // Soru 56
-        {
-            question: "Sporun en dışında, karbonhidratlı protein bir zardan oluşmuş kısmının ismi nedir?",
-            options: ["Exosporium", "Endosporium", "Zar Tabakası", "Spor Çeperi"],
-            answer: "Exosporium"
-        },
-        // Soru 57
-        {
-            question: "Genetik materyalin bir bakteri hücresinden diğerine aktarılmasını sağlayan uzantıların ismi nedir?",
-            options: ["Pilus", "Flagella", "Fimbria", "Kirpik"],
-            answer: "Pilus"
-        },
-        // Soru 58
-        {
-            question: "Hücresel mikropların en küçüğüdür. Hücre duvarlarından yoksun oldukları için, kokkoidden filamentöze kadar pek çok şekilde görünürler.",
-            options: ["Mycoplasma", "Viral Mikroplar", "Bakteri", "Protozoa"],
-            answer: "Mycoplasma"
-        },
-        // Soru 59
-        {
-            question: "Bakteri sitoplâzası içerisinde, bakteri DNA’sından ayrı olan ve ayrı bölünen yapının ismi nedir?",
-            options: ["Plazmid", "Kromozom", "Nükleoid", "Sitozom"],
-            answer: "Plazmid"
-        },
-        // Soru 60
-        {
-            question: "Sadece gram (-) bakterilerde bulunan ve hareket fonksiyonu ile hiçbir ilgileri olmayan sert yüzey uzantıları nedir?",
-            options: ["Pilus", "Fimbria", "Flagella", "Adhesin"],
-            answer: "Pilus"
-        },
-				// Soru 61
-        {
-            question: "Bulundukları bakteri hücrelerine fırça görünümü veren, genellikle çok sayıda bulunan piluslar, ne tür piluslardır?",
-            options: ["Adi Piluslar", "Cinsel Piluslar", "Hareket Pilusları", "Konjugasyon Pilusları"],
-            answer: "Adi Piluslar"
-        },
-        // Soru 62
-        {
-            question: "Adi piluslardan daha uzun, esnek görünümlü ve biraz daha kalın (8,5nm) kadar uzantılardan oluşmuş piluslara ismi denir?",
-            options: ["Cinsel", "Konjugasyon", "Hareket", "Pilusu"],
-            answer: "Cinsel"
-        },
-        // Soru 63
-        {
-            question: "Fimbriaları oluşturan protein yapısındaki alt birimlere ne denir?",
-            options: ["Pilin (Fimbrilin)", "Flagellin", "Proteozom", "Peptidoglikan"],
-            answer: "Pilin (Fimbrilin)"
-        },
-        // Soru 64
-        {
-            question: "En içte, sporun protoplasını oluşturan kısmına ne denir?",
-            options: ["Çekirdek Kısmı", "Endospora", "Spor Protoplasması", "Kapsül"],
-            answer: "Çekirdek Kısmı"
-        },
-        // Soru 65
-        {
-            question: "Jerminasyon olayı bakterilerin hangi organeli ile ilgili bir olaydır?",
-            options: ["Spor", "Plazmid", "Nükleoid", "Kromozom"],
-            answer: "Spor"
-        },
-        // Soru 66
-        {
-            question: "Sporun en dışında, karbonhidratlı protein bir zardan oluşmuş kısmının ismi nedir?",
-            options: ["Exosporium", "Endosporium", "Lipoprotein Zarı", "Çeper Zarı"],
-            answer: "Exosporium"
-        },
-        // Soru 67
-        {
-            question: "Sporların açılıp bakterilerin ortaya çıkmasına ne denir?",
-            options: ["Jerminasyon", "Sporlaşma", "Hücre Bölünmesi", "Sporifikasyon"],
-            answer: "Jerminasyon"
-        },
-        // Soru 68
-        {
-            question: "Bakteri sporunun en kalın tabakasının ismi nedir?",
-            options: ["Korteks-Kabuk", "Çeper", "Lipid Tabakası", "Endospor"],
-            answer: "Korteks-Kabuk"
-        },
-        // Soru 69
-        {
-            question: "Bakterilerin çeşitli fizik ve kimyasal çevre etkilerine karşı dayanıklılığını sağlayan oluşumlarının ismi nedir?",
-            options: ["Sporlar", "Flagella", "Fimbria", "Kapsül"],
-            answer: "Sporlar"
-        },
-        // Soru 70
-        {
-            question: "Sferoplast veya protoplastların uygun ortamda kalıp gelişip bölünerek çoğalmalarından ortaya çıkan oluşumlara ne denir?",
-            options: ["L-Şekilleri", "Mikroplazmalar", "Sferoplastlar", "Protoplastlar"],
-            answer: "L-Şekilleri"
-        },
-				// Soru 71
-        {
-            question: "Gram olumlu bakterilerin hücre çepersiz şekline ne denir?",
-            options: ["Protoplast", "Sferoplast", "Bakteriyofaj", "Mikroplazma"],
-            answer: "Protoplast"
-        },
-        // Soru 72
-        {
-            question: "Gram olumlu bakterilerin hücre çeperi ortadan kaldırılırsa ne şekline dönüşür?",
-            options: ["Protoplast", "Sferoplast", "Plazmid", "Kapsül"],
-            answer: "Protoplast"
-        },
-        // Soru 73
-        {
-            question: "Gram olumsuz bakterilerin hücre çepersiz şekline ne denir?",
-            options: ["Sferoplast", "Protoplast", "Mycoplasma", "L-Şekilleri"],
-            answer: "Sferoplast"
-        },
-        // Soru 74
-        {
-            question: "Hangi bakteri cinsinde hücre çeperi bulunmamaktadır?",
-            options: ["Mycoplasma", "Escherichia", "Salmonella", "Vibrio"],
-            answer: "Mycoplasma"
-        },
-        // Soru 75
-        {
-            question: "Bakterilere göre çok küçük, zorunlu hücre içi parazitidirler.",
-            options: ["Riketsiyalar-klamidyalar", "Mycoplasma", "Virüsler", "Algae"],
-            answer: "Riketsiyalar-klamidyalar"
-        },
-        // Soru 76
-        {
-            question: "……… türlerinin neden olduğu tüm hastalıklar, eklembacaklı vektörler (taşıyıcılar) tarafından bulaşır.",
-            options: ["Rickettsia", "Chlamydia", "Escherichia", "Salmonella"],
-            answer: "Rickettsia"
-        },
-        // Soru 77
-        {
-            question: "İkosahedral, sarmal veya kompleks yapıda kapsid ile çevrili bir nükleik asitten oluşmuş yapı hangi mikroorganizmalarda bulunur?",
-            options: ["Virus", "Bakteri", "Protozoa", "Algae"],
-            answer: "Virus"
-        },
-        // Soru 78
-        {
-            question: "Metabolik aktivitesi olmayan mikroorganizmalar sizce nedir?",
-            options: ["Viruslar", "Bakteriler", "Protozoalar", "Mantarlar"],
-            answer: "Viruslar"
-        },
-        // Soru 79
-        {
-            question: "Canlı ve cansız arasında bir yapı gösteren mikroorganizmalar sizce nedir?",
-            options: ["Viruslar", "Bakteriler", "Arkea", "Mantarlar"],
-            answer: "Viruslar"
-        },
-        // Soru 80
-        {
-            question: "Hayvan, Bitki, Protozoa, Mantarlar, Bakteriler ve Archea hücrelerini hangi mikroorganizma enfekte edebilir?",
-            options: ["Viruslar", "Bakteriler", "Protozoalar", "Mantarlar"],
-            answer: "Viruslar"
-        },
-				// Soru 81
-        {
-            question: "Klamidyalarda bulunan, 0,2-0,4 mikrometre büyüklüğündeki yapılara ne denilmektedir?",
-            options: ["Elementer Cisimcik", "Spor", "Virion", "Bakteri"],
-            answer: "Elementer Cisimcik"
-        },
-        // Soru 82
-        {
-            question: "R…………..= 0,2-0,5 µm (200-500nm) büyüklüğünde, zorunlu hücre içi mikroorganizmalardır.",
-            options: ["Rickettsia", "Ribozom", "Escherichia", "Streptococcus"],
-            answer: "Rickettsia"
-        },
-        // Soru 83
-        {
-            question: "Bakteriler üzerlerinde etkili olduğu halde virüsleri etkilemeyen maddelere ne denilmektedir?",
-            options: ["Antibiyotikler", "Asetat", "Sitrik Asit", "Virüs inhibitorları"],
-            answer: "Antibiyotikler"
-        },
-        // Soru 84
-        {
-            question: "Bakterilerin dirençli, virüslerin ise duyarlı olduğu madde nedir?",
-            options: ["İnterferon", "Penisilin", "Sülfonamid", "Rifampisin"],
-            answer: "İnterferon"
-        },
-        // Soru 85
-        {
-            question: "Çok küçük olmaları nedeniyle sadece elektron mikroskobunda görülmeleri mümkün olan mikroorganizma nedir?",
-            options: ["Virüs", "Bakteri", "Protozoa", "Algae"],
-            answer: "Virüs"
-        },
-        // Soru 86
-        {
-            question: "Virüslerin çoğalma şekline verilen isim nedir?",
-            options: ["Replikasyon", "Mitotik bölünme", "Faj entegre olma", "Bölünme"],
-            answer: "Replikasyon"
-        },
-        // Soru 87
-        {
-            question: "Algler, Mantarlar, Bakteriler, Riketsiyalar, Mycoplasma ve Virüslerden hangisinde replikasyon görülür?",
-            options: ["Virüsler", "Bakteriler", "Mantarlar", "Protozoalar"],
-            answer: "Virüsler"
-        },
-        // Soru 88
-        {
-            question: "Virüslerin büyüklüğü ne kadardır? Birimini (nanometre, mikrometre) de belirterek yazınız.",
-            options: ["20-400 nm", "100-1000 nm", "10-100 nm", "1-20 nm"],
-            answer: "20-400 nm"
-        },
-        // Soru 89
-        {
-            question: "Organizmada hastalık yapabilen en küçük canlı enfeksiyon etkenleri nedir?",
-            options: ["Virüs", "Bakteri", "Protozoa", "Mantarlar"],
-            answer: "Virüs"
-        },
-        // Soru 90
-        {
-            question: "Hangi mikroorganizmada DNA ve RNA birlikte bulunmaz?",
-            options: ["Virüsler", "Bakteriler", "Protozoa", "Mantarlar"],
-            answer: "Virüsler"
-        },
-				// Soru 91
-        {
-            question: "Replikasyondan hemen önce, virüsün hücre yüzeyindeki virüse uygun reseptörlerle etkileşime girmesi aşamasının ismi nedir?",
-            options: ["Adsorbsiyon", "İnfüzyon", "Bölünme", "Sentez"],
-            answer: "Adsorbsiyon"
-        },
-        // Soru 92
-        {
-            question: "Bakterilerin zorunlu parazitleri olup ancak canlı bakteri hücreleri içinde çoğalabilen, yapı bakımından virüs özelliğindeki mikroorganizmaların ismi nedir?",
-            options: ["Bakteriyofajlar (Fajlar)", "Virüsler", "Mycoplasma", "Riketsiyalar"],
-            answer: "Bakteriyofajlar (Fajlar)"
-        },
-        // Soru 93
-        {
-            question: "Bakteri-bakterilofaj arasındaki spesifik ilişki, önce faj’ın özgül olduğu bakteri hücresine yapışması ile başlar. Bu yapışma aşamasının ismi nedir?",
-            options: ["Adsorbsiyon", "Penetrasyon", "Faj birleşimi", "Replikasyon"],
-            answer: "Adsorbsiyon"
-        },
-        // Soru 94
-        {
-            question: "Faj enjekte ettiği bakteriyle ortak bir hayat sürdürüyorsa, bakteriyofaj-bakteri arasındaki bu ilişkiye ne isim verilir?",
-            options: ["Lizojenik", "Litik", "Faj Biyogenezi", "Replasyon"],
-            answer: "Lizojenik"
-        },
-        // Soru 95
-        {
-            question: "Bakteri DNA’sı ile bütünleşmiş olan faj’ın ismi nedir?",
-            options: ["Profaj", "Faj", "Bakteriyofaj", "Spor"],
-            answer: "Profaj"
-        },
-        // Soru 96
-        {
-            question: "Kendi DNA’ sı ile bütünleşmiş faj taşıyan bakteriye ne adı verilir?",
-            options: ["Lizojen (Lizojenik)", "Repliken", "Bakteri-Faj", "Virüs"],
-            answer: "Lizojen (Lizojenik)"
-        },
-        // Soru 97
-        {
-            question: "Bakteriyofaj bakteriye girerek onu eritiyorsa (parçalıyorsa), bu ilişkinin adı nedir?",
-            options: ["Litik", "Lizojenik", "Adsorbsiyon", "Endospor"],
-            answer: "Litik"
-        },
-        // Soru 98
-        {
-            question: "Lizojenik ilişkide; Faj DNA’sının olgunlaşıp konak bakteriyi eritmesine ne denilmektedir?",
-            options: ["İndüksiyon", "Replikasyon", "Faj Aktivasyonu", "Bakteri Yıkımı"],
-            answer: "İndüksiyon"
-        },
-        // Soru 99
-        {
-            question: "Mantarların hücre duvarı ………….den oluşur.",
-            options: ["Kitin", "Selüloz", "Peptidoglikan", "Glukan"],
-            answer: "Kitin"
-        },
-        // Soru 100
-        {
-            question: "Mantarlarda, bulundukları beslenme ortamının üzerine çıkarak yüzeyde yükselen miçelium’ların ismi nedir?",
-            options: ["Havasal= Aerialmycelium", "Vejetatif Miçelyum", "Sporofor", "Maya"],
-            answer: "Havasal= Aerialmycelium"
-        },
-				// Soru 101
-        {
-            question: "Mantarlarda, bulundukları beslenme ortamının içine uzanıp beslenme işlevi gören miçelium’ların ismi nedir?",
-            options: ["Vejetatif Miçelyum", "Aerialmycelium", "Spor", "Septum"],
-            answer: "Vejetatif Miçelyum"
-        },
-        // Soru 102
-        {
-            question: "Doğal çevrede ve laboratuar kültürlerinde küf dokuda ise maya veya maya benzeri yapılar şeklinde üreyen mantarların bu özelliklerine verilen isim nedir?",
-            options: ["Çift biçimlilik", "Maya yapısı", "Fungus Replikasyonu", "Sporulasyon"],
-            answer: "Çift biçimlilik"
-        },
-        // Soru 103
-        {
-            question: "Mikrobiyolojinin funguslar ve onların oluşturdukları bilim dalına ne adı verilir?",
-            options: ["Mikoloji", "Biyoloji", "Virologi", "Botanik"],
-            answer: "Mikoloji"
-        },
-        // Soru 104
-        {
-            question: "Küflerin vegetatif biçimlerinin temel elementi olan silindirik tüpsü iplikçiklere ne adı verilir?",
-            options: ["Hif", "Septum", "Mikroskopik filament", "Spor"],
-            answer: "Hif"
-        },
-        // Soru 105
-        {
-            question: "Görünüm bakımından mantarlar iki tür yapı gösterirler. Bu yapıların isimlerini yazınız.",
-            options: ["Küf, Maya", "Maya, Hif", "Spor, Küf", "Hif, Fungi"],
-            answer: "Küf, Maya"
-        },
-        // Soru 106
-        {
-            question: "Tek hücreli oval yada yuvarlak, 3-5 µm çapında oluşumlardan yapılı olan mantarlara ne diyoruz?",
-            options: ["Maya", "Hif", "Mikrospor", "Küf"],
-            answer: "Maya"
-        },
-        // Soru 107
-        {
-            question: "Mantarlar üreme esnasında saç şeklinde gözle görünür topluluklar oluştururlar. Buna ne adı verilir?",
-            options: ["Mycelium", "Hif", "Sporlar", "Vejetatif Küf"],
-            answer: "Mycelium"
-        },
-        // Soru 108
-        {
-            question: "Hifler iç içe girerek üreme esnasında saç şeklinde gözle görünür topluluklar oluştururlar. Buna ne adı verilir?",
-            options: ["Miçelium (mycelium)", "Aerial mycelium", "Maya", "Çift biçimlilik"],
-            answer: "Miçelium (mycelium)"
-        },
-        // Soru 109
-        {
-            question: "Mantarlarda hifi tek tek hücrelere bölen enine duvarlara ne denir?",
-            options: ["Septum", "Spor", "Hifler", "Kapsül"],
-            answer: "Septum"
-        },
-        // Soru 110
-        {
-            question: "Yüksek tuz kontrasyonunda yaşayabilme kabiliyetindeki mikroorganizmalara …………..mikroorganizmalar denilir.",
-            options: ["Halofil", "Termofil", "Akrinofil", "Psikofil"],
-            answer: "Halofil"
-        },
-				// Soru 111
-        {
-            question: "Bakteriler kendi hücreleri içerisinde kalan veya bulundukları ortama saldıkları bazı renkli maddelerin ismi nedir?",
-            options: ["Pigment", "Enzim", "Metabolit", "Toksin"],
-            answer: "Pigment"
-        },
-        // Soru 112
-        {
-            question: "Bakteri kuru ağırlığında ikinci sıklıkta bulunan elemen nedir? (C,H,O,N,Fe,Cl)",
-            options: ["Oksijen", "Azot", "Karbon", "Demir"],
-            answer: "Oksijen"
-        },
-        // Soru 113
-        {
-            question: "Mikroorganizmalara besinler; pH, ısı ve havalandırma gibi uygun çevre koşullarının sağlanması suretiyle çoğalmaları işlemine ne denir?",
-            options: ["Üretme", "Büyütme", "Kültürleme", "Bölünme"],
-            answer: "Üretme"
-        },
-        // Soru 114
-        {
-            question: "Mikroorganizmanın üremesi için besinlerinin sağlanmasına ne denir?",
-            options: ["Beslenme", "Büyüme", "Yetişme", "Metabolizma"],
-            answer: "Beslenme"
-        },
-        // Soru 115
-        {
-            question: "Ototrof mikroorganizmalarda karbon kaynağı nedir?",
-            options: ["CO2 Veya Karbonatlar", "Yağlar", "Şekerler", "Asitler"],
-            answer: "CO2 Veya Karbonatlar"
-        },
-        // Soru 116
-        {
-            question: "Hem organizma dışında hem de organizma içerisin de yaşayabilen parazitlere ne denmektedir?",
-            options: ["Fakültatif parazit", "Obligat parazit", "Komensal", "Saprofit"],
-            answer: "Fakültatif parazit"
-        },
-        // Soru 117
-        {
-            question: "Besin maddeleri olarak doğadaki inorganik maddeleri kullanan bakterilerdir. Bu bakterilerden, enerjilerini güneş ışığından alanlara ne denmektedir?",
-            options: ["Fotoototrof", "Kemoheterotrof", "Ototrof", "Heterotrof"],
-            answer: "Fotoototrof"
-        },
-        // Soru 118
-        {
-            question: "Besin ihtiyaçları için organik maddeleri kullanan ve enerjilerini gün ışığından alan bakterilere ne denmektedir?",
-            options: ["Fotoheterotrof", "Kemoheterotrof", "Kemoototrof", "Fotoototrof"],
-            answer: "Fotoheterotrof"
-        },
-        // Soru 119
-        {
-            question: "Besin ihtiyaçları için organik maddeleri kullanan bakterilere ne denir?",
-            options: ["Heterotrof", "Ototrof", "Kemoheterotrof", "Fotoheterotrof"],
-            answer: "Heterotrof"
-        },
-        // Soru 120
-        {
-            question: "Gerekli enerjiyi inorganik maddelerin oksidasyonundan sağlayanlara ne denir?",
-            options: ["Kemo Ototrof", "Fotoototrof", "Kemoheterotrof", "Ototrof"],
-            answer: "Kemo Ototrof"
-        },
-				// Soru 121
-        {
-            question: "Besin ihtiyaçları için organik maddeleri kullanan ve enerjilerini kimyasal reaksiyonlardan elde ederlere ne denir?",
-            options: ["Kemoheterotrof", "Kemo Ototrof", "Fotoheterotrof", "Ototrof"],
-            answer: "Kemoheterotrof"
-        },
-        // Soru 122
-        {
-            question: "Yaşadıkları organizmaların dışına çıktıkları zaman cansız besleyici ortamlarında yaşayamayan bakterilere ne denilmektedir?",
-            options: ["Obligat Parazitler", "Fakültatif Parazitler", "Saprofitler", "Komensaller"],
-            answer: "Obligat Parazitler"
-        },
-        // Soru 123
-        {
-            question: "Besin maddeleri olarak doğadaki inorganik maddeleri (nitratlar, amonyum tupları, CO2) kullanan bakterilere ne denir?",
-            options: ["Ototrof", "Kemoheterotrof", "Fotoheterotrof", "Heterotrof"],
-            answer: "Ototrof"
-        },
-        // Soru 124
-        {
-            question: "Yüksek organizmaların canlı doku veya hücreleri üzerinde ve içinde yasamaya uymuş ve yaşadıkları organizmaya çeşitli zararlar veren organizmalara ne denir?",
-            options: ["Parazit", "Komensal", "Saprofit", "Symbiot"],
-            answer: "Parazit"
-        },
-        // Soru 125
-        {
-            question: "Enerjilerini başka organizmaların atılmış metabolizma ürünleri ve ölü kısımlarının kimyasal reaksiyonlarından elde eden bakterilere ne denmektedir?",
-            options: ["Saprofit", "Parazit", "Heterotrof", "Ototrof"],
-            answer: "Saprofit"
-        },
-        // Soru 126
-        {
-            question: "Hem oksijenli hem de oksijensiz ortamda üreyebilen bakterilere oksijen gereksinimi bakımından ne denmektedir?",
-            options: ["Fakültatif Anaerop", "Obligat Anaerop", "Aerobik", "Obligat Aerobik"],
-            answer: "Fakültatif Anaerop"
-        },
-        // Soru 127
-        {
-            question: "Tamamıyla oksijensiz ortamda yaşaya bilme özelliğin olan bakteriler oksijen gereksinimleri bakımından hangi gruptadır?",
-            options: ["Obligat Anaerop", "Fakültatif Anaerop", "Aerobik", "Mikroaerofil"],
-            answer: "Obligat Anaerop"
-        },
-        // Soru 128
-        {
-            question: "Beslenip üreyebilmeleri için mutlak suretle oksijene ihtiyaç duyan bakterilerdir.",
-            options: ["Obligat aerobik bakteriler", "Fakültatif Anaerop", "Obligat Anaerop", "Mikroaerofil"],
-            answer: "Obligat aerobik bakteriler"
-        },
-        // Soru 129
-        {
-            question: "200C ile 450C arasında yaşayan bakteriler ısı gereksinimleri bakımından hangi gruptadır?",
-            options: ["Mezofil", "Termofil", "Psikrofil", "Hipertermofil"],
-            answer: "Mezofil"
-        },
-        // Soru 130
-        {
-            question: "Üremeleri için çok az miktarda oksijene gereksinim gösteren bakteriler oksijen gereksinimleri bakımından hangi gruptadır?",
-            options: ["Mikroaerofil", "Fakültatif Anaerop", "Obligat Anaerop", "Obligat Aerobik"],
-            answer: "Mikroaerofil"
-        },
-				// Soru 131
-        {
-            question: "80C ile 150C sıcaklıklarda yaşamaya uyum göstermiş bakteriler ısı gereksinimleri bakımından ne denmektedir?",
-            options: ["Psikrofil", "Termofil", "Mezofil", "Hipertermofil"],
-            answer: "Psikrofil"
-        },
-        // Soru 132
-        {
-            question: "150C’nin altındaki ısılarda yaşamaya uyum göstermiş bakteriler ısı gereksinimleri bakımından hangi gruptadır?",
-            options: ["Psikrofil", "Mezofil", "Termofil", "Hipertermofil"],
-            answer: "Psikrofil"
-        },
-        // Soru 133
-        {
-            question: "500C -700C sıcaklıklarda yaşamaya uyum göstermiş olan bakterilerdir ısı gereksinimleri bakımından hangi gruptadır?",
-            options: ["Termofil", "Mezofil", "Psikrofil", "Hipertermofil"],
-            answer: "Termofil"
-        }
-				];
+            {
+                question: "Metrenin milyonda biri olan uzunluk ölçüsü nedir?",
+                options: ["Nanometre", "Milimetre", "Mikrometre", "Santimetre"],
+                answer: "Mikrometre",
+                imageUrl: ""
+            },
+            {
+                question: "Metrenin milyarda biri olan uzunluk ölçüsü nedir?",
+                options: ["Mikrometre", "Nanometre", "Pikometre", "Milimetre"],
+                answer: "Nanometre",
+                imageUrl: ""
+            },
+            {
+                question: "Aşağıdakilerden hangisi doğru isimlendirilmiştir?",
+                options: ["Staphylococcus aureus", "ESCHERICHIA COLI", "Vibrio cholerae", "bacillus subtilis"],
+                answer: "Vibrio cholerae",
+                imageUrl: ""
+            },
+            {
+                question: "Bakteriler ortalama ne kadar büyüktürler? (Birimini de yazınız)",
+                options: ["2-3 Nanometre", "2-3 Mikrometre", "2-3 Milimetre", "10-20 Nanometre"],
+                answer: "2-3 Mikrometre",
+                imageUrl: ""
+            },
+            {
+                question: "Aşağıda verilenleri (a-Bakteriler, b-Virüsler, c-Ricketsia, d-Lenfosit) küçükten büyüğe doğru sıralanışı hangisidir?",
+                options: ["A, B, C, D", "D, A, C, B", "B, C, A, D", "B, A, D, C"],
+                answer: "B, C, A, D",
+                imageUrl: ""
+            },
+            {
+                question: "Bakterilerde protein sentezini hangi organeli yapar?",
+                options: ["Mezozom", "Ribozom", "Mitokondri", "Lizozom"],
+                answer: "Ribozom",
+                imageUrl: ""
+            },
+            {
+                question: "Bakterilerde mitokondrinin fonksiyonlarını hangi organel yerine getirmektedir?",
+                options: ["Ribozomlar", "Hücre zarı kıvrımları (Sitoplazmik membran)", "Mezozomlar", "Kloroplastlar"],
+                answer: "Mezozomlar",
+                imageUrl: ""
+            },
+            {
+                question: "Sayı bakımından ökaryotlarda birden fazla olan, prokaryotlarda bir tane olan yapıların ismi nedir?",
+                options: ["Ribozom", "Plazmid", "Kromozom", "Nükleoid"],
+                answer: "Kromozom",
+                imageUrl: ""
+            },
+            {
+                question: "Hangi organel ökaryotiklerde 80S prokaryotlarda 70S'tir?",
+                options: ["Mitokondriyal ribozomlar", "Golgi cisimciği", "Lizozom", "Ribozom"],
+                answer: "Ribozom",
+                imageUrl: ""
+            },
+            {
+                question: "Ökaryotların yüzeyinde bulunan ve hareketinde işlev gören çok sayıdaki uzantılara ne denir?",
+                options: ["Kamçı", "Mikrovillus", "Sil", "Pili"],
+                answer: "Sil",
+                imageUrl: ""
+            },
+            {
+                question: "Tek bir mikro organizmayı ifade eden 'tür'ün Latincesi nedir?",
+                options: ["Genus", "Familia", "Species", "Ordo"],
+                answer: "Species",
+                imageUrl: ""
+            },
+            {
+                question: "Amiplerin hareket şeklinin ismi nedir?",
+                options: ["Silli hareket", "Kamçılı hareket", "Amaboid hareket", "Kayma hareketi"],
+                answer: "Amaboid hareket",
+                imageUrl: ""
+            },
+            {
+                question: "Bakterilerin çoğalma şekli nedir?",
+                options: ["Tomurcuklanma", "Basit ikiye bölünme", "Sporla çoğalma", "Konjugasyon"],
+                answer: "Basit ikiye bölünme",
+                imageUrl: ""
+            },
+            {
+                question: "Küresel biçimli bakterilere ne denir?",
+                options: ["Basil", "Spiral", "Coccus", "Vibrio"],
+                answer: "Coccus",
+                imageUrl: ""
+            },
+            {
+                question: "Bölünmeden sonra koklar birbirlerinden ayrı düşerlerse bunlara ne denir?",
+                options: ["Diplococcus", "Streptococcus", "Micrococcus", "Staphylococcus"],
+                answer: "Micrococcus",
+                imageUrl: ""
+            },
+            {
+                question: "Üreme sırasında üç boyutlu bölündüğü için mikroskobik olarak üzüm salkımı şeklinde görülen koklara ne denir?",
+                options: ["Streptokok", "Diplokok", "Stafilokok", "Sarsina"],
+                answer: "Stafilokok",
+                imageUrl: "https://i.hizliresim.com/q9ex9it.png?_gl=1*1rokytv*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQzMTMkajQxJGwwJGgw"
+            },
+            {
+                question: "Kümeler yapmış şekilli görülen koklara ne denir?",
+                options: ["Diplokok", "Stafilokok", "Streptokok", "Tetrat"],
+                answer: "Stafilokok",
+                imageUrl: "https://i.hizliresim.com/djbbz0g.png?_gl=1*w4gkd4*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQ1NjgkajQwJGwwJGgw"
+            },
+            {
+                question: "Zincir şeklindeki koklara ne denir?",
+                options: ["Stafilokok", "Diplokok", "Streptokok", "Micrococcus"],
+                answer: "Streptokok",
+                imageUrl: "https://i.hizliresim.com/5fgfg3w.png?_gl=1*1jkq16k*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQ2MTQkajU0JGwwJGgw"
+            },
+            {
+                question: "Zincir şeklindeki yuvarlak bakterilere ne denir?",
+                options: ["Sarsina", "Tetrat", "Stafilokok", "Streptokok"],
+                answer: "Streptokok",
+                imageUrl: "https://i.hizliresim.com/5fgfg3w.png?_gl=1*1jkq16k*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQ2MTQkajU0JGwwJGgw"
+            },
+            {
+                question: "4'lü bakterilere ne denir?",
+                options: ["Diplokok", "Sarsina", "Tetrat", "Stafilokok"],
+                answer: "Tetrat",
+                imageUrl: "https://i.hizliresim.com/ojs3324.png?_gl=1*1qzxzdg*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQ3MjYkajQ0JGwwJGgw"
+            },
+            {
+                question: "Bölünme düzlemi birbirine dik olacak şekilde arka arkaya 3 bölünme gerçekleşerek oluşan 8 hücrelik bakteri paketine ne denir?",
+                options: ["Tetrat", "Stafilokok", "Sarsin", "Streptokok"],
+                answer: "Sarsin",
+                imageUrl: ""
+            },
+            {
+                question: "Çomak biçiminde bakterilere ne denir?",
+                options: ["Kok", "Spiral", "Vibrio", "Basil"],
+                answer: "Basil",
+                imageUrl: "https://i.hizliresim.com/jf27hnd.png?_gl=1*j07b4v*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQ3NjYkajQkbDAkaDA."
+            },
+            {
+                question: "Koklara benzer biçimdeki basillere ne denir?",
+                options: ["Diplobasil", "Streptobasil", "Kokobasil", "Spiroket"],
+                answer: "Kokobasil",
+                imageUrl: ""
+            },
+            {
+                question: "Zincir oluşturmuş çubuk şeklindeki bakterilere ne denir?",
+                options: ["Streptokok", "Stafilokok", "Diplobasil", "Streptobasil"],
+                answer: "Streptobasil",
+                imageUrl: "https://i.hizliresim.com/1u06n86.png?_gl=1*x6j2n0*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQ4MjYkajIzJGwwJGgw"
+            },
+            {
+                question: "Zincir oluşturmuş basillere ne denir?",
+                options: ["Kokobasil", "Streptobasil", "Diplobasil", "Vibrio"],
+                answer: "Streptobasil",
+                imageUrl: "https://i.hizliresim.com/1u06n86.png?_gl=1*x6j2n0*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQ4MjYkajIzJGwwJGgw"
+            },
+            {
+                question: "Bir veya iki uçları bazen de ortaları şişmiş görünümdeki basillere ne denir?",
+                options: ["Streptobasil", "Kokobasil", "Difteroid", "Spiroket"],
+                answer: "Difteroid",
+                imageUrl: ""
+            },
+            {
+                question: "İkili şekilde yan yana duran basillere görünüm bakımından ne denir?",
+                options: ["Diplokok", "Streptobasil", "Kokobasil", "Diplobasil"],
+                answer: "Diplobasil",
+                imageUrl: "https://i.hizliresim.com/f2a53sa.png?_gl=1*vhqnyg*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQ4NjAkajUwJGwwJGgw"
+            },
+            {
+                question: "Vücutları yumuşak bükülebilen ve kıvrılarak yılansı hareket eden sarmal şekilli bakterilere ne denir?",
+                options: ["Spiril", "Vibrio", "Spiroketler", "Basil"],
+                answer: "Spiroketler",
+                imageUrl: "https://i.hizliresim.com/75eh0ov.png?_gl=1*s0l020*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQ5MDYkajQkbDAkaDA."
+            },
+            {
+                question: "Sert vücutlu virgüle benzeyen adeta kıvrık çomakçık şeklinde olan, hareketleri kirpikle sağlanan bakterilere görünüm bakımından ne denir?",
+                options: ["Spiroket", "Spiril", "Kokobasil", "Vibriyo"],
+                answer: "Vibriyo",
+                imageUrl: "https://i.hizliresim.com/3s8favv.png?_gl=1*86gm0q*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjQ5MzgkajQ0JGwwJGgw"
+            },
+            {
+                question: "Prokaryotik hücre içinde genetik materyalin tamamını veya çoğunu içeren düzensiz şekilli bir bölgedir.",
+                options: ["Çekirdek", "Nükleoid", "Ribozom", "Plazmid"],
+                answer: "Nükleoid",
+                imageUrl: ""
+            },
+            {
+                question: "Sitoplazma içerisinde birçok bakterilerde bulunan bir oluşumdur. Sitoplazma içerisin de hücre DNA'sından ayrı olan ve ayrı bölünen bir yapıdır.",
+                options: ["Nükleoid", "Mezozom", "Plazmidlerdir", "Kromozom"],
+                answer: "Plazmidlerdir",
+                imageUrl: ""
+            },
+            {
+                question: "Gram negatif bakteriler gram boyaması sonunda ne renkte gözükürler?",
+                options: ["Mor", "Yeşil", "Mavi", "Pembe"],
+                answer: "Pembe",
+                imageUrl: ""
+            },
+            {
+                question: "Gram pozitif bakteriler gram boyaması sonunda ne renkte gözükürler?",
+                options: ["Pembe", "Mor", "Sarı", "Kırmızı"],
+                answer: "Mor",
+                imageUrl: ""
+            },
+            {
+                question: "Sitokrom ve solunum enzimleri bakterilerde hangi yapılarda bulunur?",
+                options: ["Mitokondri", "Ribozom", "Hücre Zarı", "Nükleoid"],
+                answer: "Hücre Zarı",
+                imageUrl: ""
+            },
+            {
+                question: "Mycoplasma cinsi bakterilerde bulunmayan hücre yapısı nedir?",
+                options: ["Hücre Zarı", "Ribozom", "Nükleoid", "Hücre Çeperi"],
+                answer: "Hücre Çeperi",
+                imageUrl: ""
+            },
+            {
+                question: "Gram (-) ve (+) bakterilerde çeperin sağlamlık ve direncini veren bir katmanın ismi nedir?",
+                options: ["Lipopolisakkarit", "Teikoik asit", "Peptidoglikan", "Kapsül"],
+                answer: "Peptidoglikan",
+                imageUrl: ""
+            },
+            {
+                question: "Hücre çeperi: Gram olumsuz bakterilerde bu katman ince olup _______ asit bulunmaz.",
+                options: ["Lipopolisakkarit", "Teikoik", "Murein", "Nükleik"],
+                answer: "Teikoik",
+                imageUrl: ""
+            },
+            {
+                question: "Kapsül bazı bakterilerde fibrinlerin oluşturduğu gevşek bir ağ şeklindedir. Buna ne denir?",
+                options: ["Peptidoglikan", "Endospor", "Glikokaliks", "Pili"],
+                answer: "Glikokaliks",
+                imageUrl: ""
+            },
+            {
+                question: "Kapsül, Bacillus anthracis türü bakterilerde ne yapısındadır?",
+                options: ["Polisakkarit", "Lipopolisakkarit", "Hiyalüronik asit", "D-Glutamik asit"],
+                answer: "D-Glutamik asit",
+                imageUrl: ""
+            },
+            {
+                question: "Streptococcus pyogenes'in kapsülü ne yapıdadır?",
+                options: ["D-Glutamik asit", "Hiyalüronik", "Peptidoglikan", "Polisakkarit"],
+                answer: "Hiyalüronik",
+                imageUrl: ""
+            },
+            {
+                question: "Bakterilerin salgıladıkları maddelerden yapılmış olan bakterileri saran genellikle polisakkarit yapısındaki yapılara ne denir?",
+                options: ["Hücre çeperi", "Slima tabakası", "Kapsül", "Endospor"],
+                answer: "Kapsül",
+                imageUrl: ""
+            },
+            {
+                question: "Kirpikler (Kamçılar); Sitoplazma içerisindeki başlangıç noktasına ne denmektedir?",
+                options: ["Kanca", "Filament", "Bazal Granül Bleoforoplast", "Sitoplazmik zar"],
+                answer: "Bazal Granül Bleoforoplast",
+                imageUrl: ""
+            },
+            {
+                question: "Bir bakterinin iki kutbunda da çok sayıda kirpik (kamçı) bulunuyorsa, bu kirpik tipine ne denir?",
+                options: ["Monotrichia", "Lophotrichia", "Peritrichia", "Amphitrichia"],
+                answer: "Amphitrichia",
+                imageUrl: ""
+            },
+            {
+                question: "Kirpiksiz (Kamçısız) bakterilere ne denir?",
+                options: ["Monotrichia", "Polytrichia", "Atrichia", "Ciliata"],
+                answer: "Atrichia",
+                imageUrl: ""
+            },
+            {
+                question: "Kirpikleri (Kamçıları) meydana getiren, proteinden yapılmış çok ince ve esnek birimlere ne denmektedir?",
+                options: ["Pilin", "Aktin", "Miyozin", "Flagellin"],
+                answer: "Flagellin",
+                imageUrl: ""
+            },
+            {
+                question: "Bakterilerin hareket organelinin ismi nedir?",
+                options: ["Pili", "Pseudopod", "Hücre çeperi", "Kirpik Kamçı"],
+                answer: "Kirpik Kamçı",
+                imageUrl: ""
+            },
+            {
+                question: "Tek kirpiği (kamçısı) bulunan bakterilere ne denir?",
+                options: ["Amphitrichia", "Lophotrichia", "Monotrichia", "Peritrichia"],
+                answer: "Monotrichia",
+                imageUrl: "https://i.hizliresim.com/961bu56.png?_gl=1*etfuv6*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjU1OTAkajE1JGwwJGgw"
+            },
+            {
+                question: "Şekilde görülen (bir uçta bir demet kamçısı olan) bakteriye kirpikleri (kamçıları) bakımından ne ad verilir?",
+                options: ["Monotrichia", "Lophotrichia", "Amphitrichia", "Peritrichia"],
+                answer: "Lophotrichia",
+                imageUrl: "https://i.hizliresim.com/r094hp6.png?_gl=1*1xdglgl*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjU4NzUkajQ0JGwwJGgw"
+            },
+            {
+                question: "Çok sayıda, bakteri hücresinin her tarafına dağılmış kirpik (kamçı) şekline ne denir?",
+                options: ["Monotrichia", "Lophotrichia", "Amphitrichia", "Peritrichia"],
+                answer: "Peritrichia",
+                imageUrl: "https://i.hizliresim.com/imtw8vi.png?_gl=1*gltaoo*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjU5MDYkajEzJGwwJGgw"
+            },
+            {
+                question: "Genetik materyalin bir bakteri hücresinden diğerine aktarılmasını sağlayan uzantıların ismi nedir?",
+                options: ["Kamçılar", "Kapsüller", "Fimbriyalar", "Piluslar"],
+                answer: "Piluslar",
+                imageUrl: ""
+            },
+            {
+                question: "Hücresel mikropların en küçüğüdür. Hücre duvarlarından yoksun oldukları için, kokcoidden filamentöze kadar pek çok şekilde görünürler.",
+                options: ["Spiroket", "Riketsiya", "Mycoplasma", "Virüs"],
+                answer: "Mycoplasma",
+                imageUrl: ""
+            },
+            {
+                question: "Bakteri sitoplazması içerisinde, bakteri DNA'sından ayrı olan ve ayrı bölünen yapının ismi nedir?",
+                options: ["Nükleoid", "Ribozom", "Mezozom", "Plazmid"],
+                answer: "Plazmid",
+                imageUrl: ""
+            },
+            {
+                question: "Sadece gram (-) bakterilerde bulunan ve hareket fonksiyonu ile hiçbir ilgileri olmayan sert yüzey uzantıları nedir?",
+                options: ["Kamçılar", "Teikoik asitler", "Piluslar", "Kapsüller"],
+                answer: "Piluslar",
+                imageUrl: ""
+            },
+            {
+                question: "Bulundukları bakteri hücrelerine fırça görünümü veren, genellikle çok sayıda bulunan piluslar, ne tür piluslardır?",
+                options: ["Cinsel Piluslar", "Adi Piluslar", "Kamçılar", "Kapsüller"],
+                answer: "Adi Piluslar",
+                imageUrl: ""
+            },
+            {
+                question: "Adi piluslardan daha uzun, esnek görünümlü ve biraz daha kalın (8,5nm) kadar uzantılardan oluşmuş piluslara ismi denir?",
+                options: ["Adi Piluslar", "Fimbriyalar", "Cinsel", "Kamçılar"],
+                answer: "Cinsel",
+                imageUrl: ""
+            },
+            {
+                question: "Fimbriaları oluşturan protein yapısındaki alt birimlere ne denir?",
+                options: ["Flagellin", "Aktin", "Pilin (Fimbrilin)", "Tübülin"],
+                answer: "Pilin (Fimbrilin)",
+                imageUrl: ""
+            },
+            {
+                question: "Jerminasyon olayı bakterilerin hangi organeli ile ilgili bir olaydır?",
+                options: ["Kapsül", "Plazmid", "Ribozom", "Spor"],
+                answer: "Spor",
+                imageUrl: ""
+            },
+            {
+                question: "Sporların açılıp bakterilerin ortaya çıkmasına ne denir?",
+                options: ["Sporulasyon", "Jerminasyon", "Konjugasyon", "Transformasyon"],
+                answer: "Jerminasyon",
+                imageUrl: ""
+            },
+            {
+                question: "Bakterinin tam ortasına yerleşmiş olan spor tipine ne denir?",
+                options: ["Terminal Spor", "Subterminal Spor", "Santral Spor", "Lateral Spor"],
+                answer: "Santral Spor",
+                imageUrl: "https://i.hizliresim.com/tm32uwu.png?_gl=1*o0p8ce*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjYxNTQkajIyJGwwJGgw"
+            },
+            {
+                question: "Bakterilerin çeşitli fizik ve kimyasal çevre etkilerine karşı dayanıklılığını sağlayan oluşumlarının ismi nedir?",
+                options: ["Kapsüller", "Plazmidler", "Piluslar", "Sporlar"],
+                answer: "Sporlar",
+                imageUrl: ""
+            },
+            {
+                question: "Sporlar bakterinin ortası ile bir kutbu arasında yerleşmişse, bu tür sporlara ne denir?",
+                options: ["Santral Spor", "Terminal Spor", "Parasantral Spor", "Subterminal"],
+                answer: "Subterminal",
+                imageUrl: "https://i.hizliresim.com/6m8m52r.png?_gl=1*3979vd*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjYyMTMkajMyJGwwJGgw"
+            },
+            {
+                question: "Sporlar bakterinin bir kutbuna yerleşmişse, bu tür sporlara ne denir?",
+                options: ["Santral Spor", "Subterminal Spor", "Terminal", "Ekvatoral Spor"],
+                answer: "Terminal",
+                imageUrl: "https://i.hizliresim.com/k2mv5xq.png?_gl=1*kijnde*_ga*MTUxMDA1MzgyNy4xNzQ5MTIzNDU5*_ga_M9ZRXYS2YN*czE3NDkxMjM0NTgkbzEkZzEkdDE3NDkxMjYyNDYkajYwJGwwJGgw"
+            },
+            {
+                question: "Sferoplast veya prootoplastların uygun ortamda kalıp gelişip bölünerek çoğalmalarından ortaya çıkan oluşumlara ne denir?",
+                options: ["Mycoplasma", "Sporlar", "Kistler", "L-Şekilleri"],
+                answer: "L-Şekilleri",
+                imageUrl: ""
+            },
+            {
+                question: "Gram olumlu bakterilerin hücre çeperi ortadan kaldırılırsa ne şekline dönüşür?",
+                options: ["Sferoplast", "L-Formu", "Protoplast", "Mycoplasma"],
+                answer: "Protoplast",
+                imageUrl: ""
+            },
+            {
+                question: "Gram olumsuz bakterilerin hücre çepersiz şekline ne denir?",
+                options: ["Protoplast", "Sferoplast", "L-Formu", "Otolizin"],
+                answer: "Sferoplast",
+                imageUrl: ""
+            },
+            {
+                question: "Hangi bakteri cinsinde hücre çeperi bulunmamaktadır?",
+                options: ["Bacillus", "Clostridium", "Streptococcus", "Mycoplasma"],
+                answer: "Mycoplasma",
+                imageUrl: ""
+            },
+            {
+                question: "Canlı ve cansız arasında bir yapı gösteren mikroorganizmalar sizce nedir?",
+                options: ["Bakteriler", "Mantarlar", "Viruslar", "Protozoalar"],
+                answer: "Viruslar",
+                imageUrl: ""
+            },
+            {
+                question: "Bakteriler üzerlerinde etkili olduğu halde virüsleri etkilemeyen maddelere ne denilmektedir?",
+                options: ["Antiviraller", "Antifungaller", "Antiseptikler", "Antibiyotikler"],
+                answer: "Antibiyotikler",
+                imageUrl: ""
+            },
+            {
+                question: "Bakterilerin dirençli, virüslerin ise duyarlı olduğu madde nedir?",
+                options: ["Penisilin", "Interferon", "Lizozim", "Komplement"],
+                answer: "Interferon",
+                imageUrl: ""
+            },
+            {
+                question: "Çok küçük olmaları nedeniyle sadece elektron mikroskobunda görülmeleri mümkün olan mikroorganizma nedir?",
+                options: ["Bakteri", "Maya", "Protozoa", "Virus"],
+                answer: "Virus",
+                imageUrl: ""
+            },
+            {
+                question: "Virüslerin çoğalma şekline verilen isim nedir?",
+                options: ["İkiye Bölünme", "Tomurcuklanma", "Replikasyon", "Sporla Çoğalma"],
+                answer: "Replikasyon",
+                imageUrl: ""
+            },
+            {
+                question: "Virüslerin büyüklüğü ne kadardır? Birimini (nanometre, mikrometre) de belirterek yazınız.",
+                options: ["2-10 µm", "0.1-0.5 mm", "500-1000 nm", "20-400 nm"],
+                answer: "20-400 nm",
+                imageUrl: ""
+            },
+            {
+                question: "Organizmada hastalık yapabilen en küçük canlı enfeksiyon etkenleri nedir?",
+                options: ["Bakteri", "Prion", "Mikoplazma", "Virüs"],
+                answer: "Virüs",
+                imageUrl: ""
+            },
+            {
+                question: "Hangi mikroorganizmada DNA ve RNA birlikte bulunmaz?",
+                options: ["Bakteriler", "Mantarlar", "Protozoalar", "Virüsler"],
+                answer: "Virüsler",
+                imageUrl: ""
+            },
+            {
+                question: "Replikasyondan hemen önce, virüsün hücre yüzeyindeki virüse uygun reseptörlerle etkileşime girmesi aşamasının ismi nedir?",
+                options: ["Penetrasyon", "Replikasyon", "Adsorbsiyon", "Salınım"],
+                answer: "Adsorbsiyon",
+                imageUrl: ""
+            },
+            {
+                question: "Bakterilerin zorunlu parazitleri olup ancak canlı bakteri hücreleri içinde çoğalabilen, yapı bakımından virüs özelliğindeki mikroorganizmaların ismi nedir?",
+                options: ["Plazmidler", "Mikoplazmalar", "Riketsiyalar", "Bakteriyofajlar (Fajlar)"],
+                answer: "Bakteriyofajlar (Fajlar)",
+                imageUrl: ""
+            },
+            {
+                question: "Faj enjekte ettiği bakteriyle ortak bir hayat sürdürüyorsa, bakteriyofaj-bakteri arasındaki bu ilişkiye ne isim verilir?",
+                options: ["Litik", "Simbiyotik", "Lizojenik", "Kommensal"],
+                answer: "Lizojenik",
+                imageUrl: ""
+            },
+            {
+                question: "Bakteri DNA'sı ile bütünleşmiş olan faj'ın ismi nedir?",
+                options: ["Epizom", "Plazmid", "Profaj", "Transpozon"],
+                answer: "Profaj",
+                imageUrl: ""
+            },
+            {
+                question: "Kendi DNA' sı ile bütünleşmiş faj taşıyan bakteriye ne adı verilir?",
+                options: ["Profaj", "Transdüksiyonlu bakteri", "Faj Konakçısı", "Lizojen (Lizojenik)"],
+                answer: "Lizojen (Lizojenik)",
+                imageUrl: ""
+            },
+            {
+                question: "Bakteriyofaj bakteriye girerek onu eritiyorsa (parçalıyorsa), bu ilişkinin adı nedir?",
+                options: ["Lizojenik", "Litik", "Konjugatif", "Transformatif"],
+                answer: "Litik",
+                imageUrl: ""
+            },
+            {
+                question: "Lizojenik ilişkide; Faj DNA' sının olgunlaşıp konak bakteriyi eritmesine ne denilmektedir?",
+                options: ["Replikasyon", "Transkripsiyon", "Lizis", "İndüksiyon"],
+                answer: "İndüksiyon",
+                imageUrl: ""
+            },
+            {
+                question: "Mantarların hücre duvarı …………. oluşur.",
+                options: ["Peptidoglikandan", "Selülozdan", "Kitinden", "Lipopolisakkaritten"],
+                answer: "Kitinden",
+                imageUrl: ""
+            },
+            {
+                question: "Mantarlarda, bulundukları beslenme ortamının üzerine çıkarak yüzeyde yükselen miçelium'ların ismi nedir?",
+                options: ["Vejetatif miçelyum", "Substrat miçelyum", "Havasal miçelyum (Aerial mycelium)", "Fertil miçelyum"],
+                answer: "Havasal miçelyum (Aerial mycelium)",
+                imageUrl: ""
+            },
+            {
+                question: "Mantarlarda, bulundukları beslenme ortamının içine uzanıp beslenme işlevi gören miçelium'ların ismi nedir?",
+                options: ["Havasal miçelyum", "Üreme miçelyumu", "Rizoid miçelyum", "Vejetatif Miçelyum"],
+                answer: "Vejetatif Miçelyum",
+                imageUrl: ""
+            },
+            {
+                question: "Doğal çevrede ve laboratuar kültürlerinde küf dokuda ise maya veya maya benzeri yapılar şeklinde üreyen mantarların bu özelliklerine verilen isim nedir?",
+                options: ["Pleomorfizm", "Metamorfoz", "Dimorfizm (Çift biçimlilik)", "Heterotallizm"],
+                answer: "Dimorfizm (Çift biçimlilik)",
+                imageUrl: ""
+            },
+            {
+                question: "Mikrobiyolojinin funguslar ve onların oluşturdukları bilim dalına ne adı verilir?",
+                options: ["Bakteriyoloji", "Viroloji", "Parazitoloji", "Mikoloji"],
+                answer: "Mikoloji",
+                imageUrl: ""
+            },
+            {
+    "question": "Küflerin vejetatif biçimlerinin temel elementi olan silindirik tüpsü iplikçiklere ne adı verilir?",
+    "options": ["Miçelyum", "Spor", "Hif", "Konidi"],
+    "answer": "Hif",
+    "imageUrl": ""
+  },
+  {
+    "question": "Görünüm bakımından mantarlar iki tür yapı gösterirler. Bu yapıların isimlerini yazınız.",
+    "options": ["Hif, Miçelyum", "Spor, Konidi", "Bakteri, Virüs", "Küf, Maya"],
+    "answer": "Küf, Maya",
+    "imageUrl": ""
+  },
+  {
+    "question": "Tek hücreli oval yada yuvarlak, 3-5 µm çapında oluşumlardan yapılı olan mantarlara ne diyoruz?",
+    "options": ["Küf", "Hif", "Maya", "Bakteri"],
+    "answer": "Maya",
+    "imageUrl": ""
+  },
+  {
+    "question": "Hifler iç içe girerek üreme esnasında saç şeklinde gözle görünür topluluklar oluştururlar. Buna ne adı verilir?",
+    "options": ["Hif", "Koloni", "Miçelium (mycelium)", "Sporanjiyum"],
+    "answer": "Miçelium (mycelium)",
+    "imageUrl": ""
+  },
+  {
+    "question": "Mantarlarda hifi tek tek hücrelere bölen enine duvarlara ne denir?",
+    "options": ["Hücre duvarı", "Kapsül", "Septum", "Stolon"],
+    "answer": "Septum",
+    "imageUrl": ""
+  },
+            {
+                question: "Dokuların tripsin ile ayrıştırılması ile elde edilen hücrelerin invitro üretilmeleri ile elde edilen doku kültürlerine …………………doku kültürleri adı verilir.",
+                options: ["Sürekli", "Sekonder", "Primer (Birincil)", "Hücre hattı"],
+                answer: "Primer (Birincil)",
+                imageUrl: ""
+            },
+            {
+                question: "Bazı tümörlerin hücrelerinden ya da transformasyona uğramış hücrelerden elde edilen doku kültürlerine …………… denir.",
+                options: ["Primer doku kültürleri", "Sürekli doku kültürleri", "Organ kültürleri", "Explant kültürleri"],
+                answer: "Sürekli doku kültürleri",
+                imageUrl: ""
+            },
+            {
+                question: "Yüksek tuz kontrasyonunda yaşayabilme kabiliyetindeki mikroorganizmalara ………….. mikroorganizmalar denilir.",
+                options: ["Termofil", "Psikrofil", "Asidofil", "Halofil"],
+                answer: "Halofil",
+                imageUrl: ""
+            },
+            {
+                question: "Bakteriler kendi hücreleri içerisinde kalan veya bulundukları ortama saldıkları bazı renkli maddelerin ismi nedir?",
+                options: ["Toksin", "Enzim", "Kapsül", "Pigment"],
+                answer: "Pigment",
+                imageUrl: ""
+            },
+            {
+                question: "Hem organizma dışında hem de organizma içerisin de yaşayabilen parazitlere ne denmektedir?",
+                options: ["Obligat Parazit", "Saprofit", "Fakültatif Parazit", "Kommensal"],
+                answer: "Fakültatif Parazit",
+                imageUrl: ""
+            },
+            {
+                question: "Besin maddeleri olarak doğadaki inorganik maddeleri kullanan bakterilerdir. Bu bakterilerden, enerjilerini güneş ışığından alanlara ne denmektedir?",
+                options: ["Fotoheterotrof", "Kemoototrof", "Kemoheterotrof", "Fotoototrof"],
+                answer: "Fotoototrof",
+                imageUrl: ""
+            },
+            {
+                question: "Besin ihtiyaçları için organik maddeleri kullanan ve enerjilerini gün ışığından alan bakterilere ne denmektedir?",
+                options: ["Fotoototrof", "Fotoheterotrof", "Kemoototrof", "Kemoheterotrof"],
+                answer: "Fotoheterotrof",
+                imageUrl: ""
+            },
+            {
+                question: "Besin ihtiyaçları için organik maddeleri kullanan bakterilere ne denir?",
+                options: ["Ototrof", "Fototrof", "Kemotrof", "Heterotrof"],
+                answer: "Heterotrof",
+                imageUrl: ""
+            },
+            {
+                question: "Gerekli enerjiyi inorganik maddelerin oksidasyonundan sağlayanlara ne denir?",
+                options: ["Kemoheterotrof", "Fotoototrof", "Fotoheterotrof", "Kemoototrof"],
+                answer: "Kemoototrof",
+                imageUrl: ""
+            },
+            {
+                question: "Besin ihtiyaçları için organik maddeleri kullanan ve enerjilerini kimyasal reaksiyonlardan elde ederlere ne denir?",
+                options: ["Kemoototrof", "Fotoototrof", "Kemoheterotrof", "Fotoheterotrof"],
+                answer: "Kemoheterotrof",
+                imageUrl: ""
+            },
+            {
+                question: "Yaşadıkları organizmaların dışına çıktıkları zaman cansız besleyici ortamlarında yaşayamayan bakterilere ne denilmektedir?",
+                options: ["Fakültatif Parazitler", "Saprofitler", "Kommensaller", "Obligat Parazitler"],
+                answer: "Obligat Parazitler",
+                imageUrl: ""
+            },
+            {
+                question: "Besin maddeleri olarak doğadaki inorganik maddeleri (nitratlar, amonyum tuzları, CO2 ) kullanan bakterilere ne denir?",
+                options: ["Heterotrof", "Saprofit", "Parazit", "Ototrof"],
+                answer: "Ototrof",
+                imageUrl: ""
+            },
+            {
+                question: "Yüksek organizmaların canlı doku veya hücreleri üzerinde ve içinde yaşamaya uymuş ve yaşadıkları organizmaya çeşitli zararlar veren organizmalara ne denir?",
+                options: ["Saprofit", "Kommensal", "Mutualist", "Parazit"],
+                answer: "Parazit",
+                imageUrl: ""
+            },
+            {
+                question: "Enerjilerini başka organizmaların atılmış metabolizma ürünleri ve ölü kısımlarının kimyasal reaksiyonlarından elde eden bakterilere ne denmektedir?",
+                options: ["Parazit", "Ototrof", "Kemoototrof", "Saprofit"],
+                answer: "Saprofit",
+                imageUrl: ""
+            },
+            {
+                question: "Hem oksijenli hem de oksijensiz ortamda üreyebilen bakterilere oksijen gereksinimi bakımından ne denmektedir?",
+                options: ["Obligat Aerop", "Obligat Anaerop", "Fakültatif Anaerop", "Mikroaerofil"],
+                answer: "Fakültatif Anaerop",
+                imageUrl: ""
+            },
+            {
+                "question": "Tamamıyle oksijensiz ortamda yaşaya bilme özelliğin olan bakteriler oksijen gereksinimleri bakımından hangi gruptadır?",
+                "options": ["Fakültatif Anaerop", "Obligat Aerop", "Obligat Aneerop", "Mikroaerofil"],
+                "answer": "Obligat Aneerop",
+                "imageUrl": ""
+            },
+            {
+                "question": "200C ile 450C arasında yaşayan bakteriler ısı gereksinimleri bakımından hangi gruptadır?",
+                "options": ["Termofil", "Psikrofil", "Mezofil", "Hipertermofil"],
+                "answer": "Mezofil",
+                "imageUrl": ""
+            },
+            {
+                "question": "Üremeleri için çok az miktarda oksijene gereksinim gösteren bakteriler oksijen gereksinimleri bakımından hangi gruptadır?",
+                "options": ["Obligat Aerop", "Obligat Anaerop", "Fakültatif Anaerop", "Mikroaerofil"],
+                "answer": "Mikroaerofil",
+                "imageUrl": ""
+            },
+            {
+                "question": "150C'nin altındaki ısılarda yaşamaya uyum göstermiş bakteriler ısı gereksinimleri bakımından hangi gruptadır?",
+                "options": ["Mezofil", "Termofil", "Psikrofil", "Hipertermofil"],
+                "answer": "Psikrofil",
+                "imageUrl": ""
+            },
+            {
+                "question": "500C -700C sıcaklıklarda yaşamaya uyum göstermiş olan bakterilerdir ısı gereksinimleri bakımından hangi gruptadır?",
+                "options": ["Mezofil", "Psikrofil", "Hipertermofil", "Termofil"],
+                "answer": "Termofil",
+                "imageUrl": ""
+            },
+            {
+                "question": "Virüsleri aşağıdakilerden hangisinde üretemezsiniz?\na) besi yerlerinde, b) deney hayvanlarında, c) embriyonlu yumurtada d) doku kültürlerinde, e) tavşanda",
+                "options": ["Deney hayvanlarında", "Embriyonlu yumurtada", "Doku kültürlerinde", "Besiyerlerinde"],
+                "answer": "Besiyerlerinde",
+                "imageUrl": ""
+            },
+            {
+                "question": "Yapısında pepton, tuz ve su (peptonlu su) bulunan temel sıvı besi yerine ne denir?",
+                "options": ["Jeloz", "Agar", "Peptonlu agar", "Buyyon"],
+                "answer": "Buyyon",
+                "imageUrl": ""
+            },
+            {
+                "question": "Sıvı besi yerine ne katılarak katı besiyeri elde edilir.\n a) adari, b) abar, c) acs, d) agar, e) fenil alanin",
+                "options": ["Jelatin", "Silika jel", "Pepton", "Agar"],
+                "answer": "Agar",
+                "imageUrl": ""
+            },
+            {
+                "question": "Besi yerlerinin katıştırılmasında kullanılan ağar maddesi kaç derecenin altında katılaşır?",
+                "options": ["950C", "600C", "250C", "420C"],
+                "answer": "420C",
+                "imageUrl": ""
+            },
+            {
+                "question": "Tüp, şişe, petri kutusu vb gibi laboratuar kaplarında uygun besleyici sıvılar içerisinde üretilmiş canlı hücrelerden oluşan hücre topluluğuna ne denmektedir?",
+                "options": ["Besiyeri", "Koloni", "Embriyonlu yumurta", "Doku Kültürleri"],
+                "answer": "Doku Kültürleri",
+                "imageUrl": ""
+            },
+            {
+                "question": "Virüsleri doku kültüründen başka hangi ortamda üretebilirsiniz?",
+                "options": ["Cansız besiyerleri", "Agar plakları", "Buyyon", "Deney hayvanları, Embriyonlu yumurta"],
+                "answer": "Deney hayvanları, Embriyonlu yumurta",
+                "imageUrl": ""
+            },
+            {
+                "question": "Virüsleri deney hayvanları ve embriyonlu yumurta dışında nerede üretebilirsiniz?",
+                "options": ["Nutrient agar", "Kanlı agar", "Sentetik besiyeri", "Doku kültürü"],
+                "answer": "Doku kültürü",
+                "imageUrl": ""
+            },
+            {
+                "question": "Canlı ortamlar çerisinde mikropların çoğalmasına; ne tür üreme denir?",
+                "options": ["İnvitro Üreme", "Aseksüel Üreme", "Vejetatif Üreme", "İnvivo Üreme"],
+                "answer": "İnvivo Üreme",
+                "imageUrl": ""
+            },
+            {
+                "question": "95 derecede eriyip 42 derecede katılaşan ve deniz yosunundan elde edilen, besi yerlerini katılaştırmada kullanılan maddenin ismi nedir?",
+                "options": ["Jelatin", "Pektin", "Karragenan", "Agar"],
+                "answer": "Agar",
+                "imageUrl": ""
+            },
+            {
+                "question": "İçlerindeki ayıraçlar aracılığı ile benzer bakterilerin ayrı görünümde koloniler oluşturmalarını sağlayarak karışık bakterileri bir birinden ayırmaya yarayan özel besi yerlerine ne denmektedir?",
+                "options": ["Zenginleştirilmiş besiyeri", "Seçici besiyeri", "Temel besiyeri", "Ayırtıcı besiyeri"],
+                "answer": "Ayırtıcı",
+                "imageUrl": ""
+            },
+            {
+                "question": "Buyyona agar eklemek suretiyle elde edilen katı besi yerine ne adı verilir?",
+                "options": ["Buyyon", "Peptonlu su", "Kanlı agar", "Jeloz"],
+                "answer": "Jeloz",
+                "imageUrl": ""
+            },
+            {
+                "question": "Yalnız bir çeşit mikrobun üretilmesi için hazırlanan özel besi yerlerine ne denir?",
+                "options": ["Genel besiyeri", "Ayırtıcı besiyeri", "Zenginleştirilmiş besiyeri", "Özgül Besiyeri"],
+                "answer": "Özgül BY",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bazı mikroorganizma türlerinin üremesi için uygun olup, bunun yanında diğer mikroorganizmaların üremelerini engelleyici maddeler içeren özel besi yerlerine ne tür besi yeri denmektedir?",
+                "options": ["Ayırtıcı besiyeri", "Zenginleştirilmiş besiyeri", "Taşıma besiyeri", "Seçici Besiyeri"],
+                "answer": "Seçici Besiyeri",
+                "imageUrl": ""
+            },
+            {
+                "question": "Yapısında pepton, tuz, su (peptonlu su) bulunan besi yerine ne denir?",
+                "options": ["Katı besiyeri", "Zenginleştirilmiş besiyeri", "Ayırtıcı besiyeri", "Temel besiyeri (Buyyon)"],
+                "answer": "Temel (Buyyon)",
+                "imageUrl": ""
+            },
+            {
+                "question": "Temel besi yerlerine kan, serum, glikoz, yumurta gibi daha besleyici maddeler eklenmesi ile elde edilen besi yerlerine ne tür besi yeri denmektedir?",
+                "options": ["Seçici besiyeri", "Ayırtıcı besiyeri", "Sentetik besiyeri", "Zenginleştirilmiş besiyeri"],
+                "answer": "Zenginleştirilmiş",
+                "imageUrl": ""
+            },
+            {
+                "question": "Ekim sonrası ayrı düşmüş tek bir bakteri, bulunduğu yerde üreyerek sınırlı bir bakteri topluluğu meydana getirir ki buna ne adı verilir?",
+                "options": ["Kültür", "Suş", "Biyofilm", "Koloni"],
+                "answer": "Koloni",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bir bakteri hücresinden 2 yavru hücrenin oluşması için gerekli olan süreye ne denir?",
+                "options": ["Lag Fazı", "Logaritmik Faz", "Jenerasyon Süresi", "İkiye Bölünme Hızı"],
+                "answer": "Jenerasyon Süresi",
+                "imageUrl": ""
+            },
+            {
+                "question": "Sahanda yumurta görünümlü koloni oluşturan bakteri cinsi nedir?",
+                "options": ["Staphylococcus", "Streptococcus", "Escherichia", "Mycoplasmalar"],
+                "answer": "Mycoplasmalar",
+                "imageUrl": ""
+            },
+            {
+                "question": "Hücre çeperi bulunmayan bakteriler ne tipte koloni oluştururlar?",
+                "options": ["S", "R", "M", "L"],
+                "answer": "L",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bakterilerin en çok görünen koloniler olan yuvarlak, düz kenarlı, kabarık, düz yüzeyli, nemli ve homojen kolonilere ne tip koloni denir?",
+                "options": ["Rough", "Mucoid", "Filamentöz", "Smooth"],
+                "answer": "Smooth",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bakterilerin sıvı besi yerinde temel üreme görünümleri nedir?",
+                "options": ["Koloni oluşumu", "Zar oluşumu", "Çökelti oluşumu", "Bulanıklık"],
+                "answer": "Bulanıklık",
+                "imageUrl": ""
+            },
+            {
+                "question": "Kapsüllü bakterilerin yaptığı koloni tipi nedir?",
+                "options": ["Smooth", "Rough", "L-form", "Mukoit"],
+                "answer": "Mukoit",
+                "imageUrl": ""
+            },
+            {
+                "question": "Yüzeyleri buruşuk görünümlü, kenarları girintili çıkıntılı, basık, yassı görünümde kolonilerin ismi nedir?",
+                "options": ["S Koloni", "M Koloni", "Punktiform Koloni", "R Koloni"],
+                "answer": "R Koloni",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bakterilerin en çok görünen koloni tipinin ismi nedir?",
+                "options": ["R Koloni", "M Koloni", "Filamentöz Koloni", "S Koloni"],
+                "answer": "S Koloni",
+                "imageUrl": ""
+            },
+            {
+                "question": "Mycoplasmalar özel agarlı besi yerlerinde üretildiklerinde ne görünümü verirler?",
+                "options": ["Üzüm salkımı", "Zincir şeklinde", "Düzensiz küme", "Sahanda Yumurta"],
+                "answer": "Sahanda Yumurta",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bazı virüsler bu doku kültürlerinde üretildiklerinde hücrelerde mikroskop ile görülebilen çeşitli değişiklikler oluştururlar. Bu tür değişiklik oluşturmaya ne denir?",
+                "options": ["Hemaglütinasyon", "Lizis", "Transformasyon", "Sitopatik Etki"],
+                "answer": "Sitopatik Etki",
+                "imageUrl": ""
+            },
+            {
+                "question": "Birlikte yaşayan iki mikroorganizmadan her birisi de bu ortak yaşamdan karşılıklı yarar sağlıyorsa bu birlikte yaşam türüne denir?",
+                "options": ["Kommensalizm", "Parazitizm", "Sinerjizm", "Mutuallik"],
+                "answer": "Mutuallik",
+                "imageUrl": ""
+            },
+            {
+                "question": "Ortak yaşama şeklinde birlikte bulunan mikroplardan birisi, bu ortak yaşamdan yarar sağladığı halde diğeri ne yarar ne de zarara uğruyorsa, bu ortak yaşama ne denir?",
+                "options": ["Mutualizm", "Parazitizm", "Antibiyoz", "Kommensalizm"],
+                "answer": "Kommensal",
+                "imageUrl": ""
+            },
+            {
+                "question": "Birlikte yaşayan iki mikroorganizmanın ortak etkilerinin, her birisin ayrı ayrı oluşturabileceği etkiler toplamından daha çok olması durumuna ne denir?",
+                "options": ["Antagonizma", "Mutualizm", "Kommensalizm", "Sinerjismus"],
+                "answer": "Sinerjismus",
+                "imageUrl": ""
+            },
+            {
+                "question": "Birlikte yaşayan mikroplardan birisi diğerinin yaşamı üzerine zararlı etki yapması durumuna ne ismi verilir?",
+                "options": ["Mutualizm", "Kommensalizm", "Sinerjizm", "Antibiyoz"],
+                "answer": "Antibiyoz",
+                "imageUrl": ""
+            },
+            {
+                "question": "Mikroorganizma ve konak, birbirlerinin yararına bir ilişki içinde ise, bu ilişki biçimine ne isim verilmektedir?",
+                "options": ["Kommensalizm", "Parazitizm", "Nötralizm", "Mutuallik"],
+                "answer": "Mutuallik",
+                "imageUrl": ""
+            },
+            {
+                "question": "Konak üzerinde bulunan mikroorganizmaların konağa zarar ve fayda vermeden canlılığını sürdürmesine ne denmektedir?",
+                "options": ["Mutualizm", "Parazitizm", "Saprofitizm", "Kommensallik"],
+                "answer": "Kommensallik",
+                "imageUrl": ""
+            },
+            {
+                "question": "Stopatik etkinin incelendiği canlı ortamının ismi nedir?",
+                "options": ["Besiyeri", "Embriyonlu yumurta", "Deney hayvanı", "Doku kültürü/Hücre kültürü"],
+                "answer": "Doku kültürü/Hücre kültürü",
+                "imageUrl": ""
+            },
+            {
+                "question": "Sıvı besi yelerinde bakteri kolonileri ne tiptedir?",
+                "options": ["S tipi koloni", "R tipi koloni", "M tipi koloni", "Sıvı besi yerinde koloni oluşmaz"],
+                "answer": "Sıvı besi yerinde koloni oluşmaz",
+                "imageUrl": ""
+            },
+            {
+                "question": "………………….= Bakteri enfeksiyonlarının tedavisinde kullanılan, canlı bakteriye karşı etkili olan madde aşağıdakilerden hangisidir ? (**Dekontaminizasyon, **Mikrobisit, **Antibakteriyel, **Sterilizasyon).",
+                "options": ["Dekontaminizasyon", "Mikrobisit", "Antibakteriyel", "Sterilizasyon"],
+                "answer": "Antibakteriyel",
+                "imageUrl": ""
+            },
+            {
+                "question": "Patojen mikroorganizmaları öldürmek veya çoğalmalarını önlemek için vücut yüzeylerine yerel olarak kimyasal maddelerin uygulanmasına ne denir? (**Antisepsi, **Dezenfeksiyon, ** Mikrobisit, **Sterilizasyon).",
+                "options": ["Antisepsi", "Dezenfeksiyon", "Mikrobisit", "Sterilizasyon"],
+                "answer": "Antisepsi",
+                "imageUrl": ""
+            },
+            {
+                "question": "Hastalık yapıcı (patojen) mikroorganizmaların cansız ortamdan kaldırılmasına ne denir? (**Antisepsi, **Dezenfeksiyon, **Sterilizasyon, ** Dekontaminizasyon).",
+                "options": ["Antisepsi", "Dezenfeksiyon", "Sterilizasyon", "Dekontaminizasyon"],
+                "answer": "Dezenfeksiyon",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bütün mikroorganizma gruplarını (Bakteri, Protozoon, Alg, vb.) öldüren herhangi bir madde ya da etmene ne denir? (**Antisepsi, **Dezenfeksiyon, ** Mikrobisit, **Sterilizasyon).",
+                "options": ["Antisepsi", "Dezenfeksiyon", "Mikrobisit", "Sterilizasyon"],
+                "answer": "Mikrobisit",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bir ortamda bulunan tüm mikroorganizmaların öldürülmesine ne denir? (**Antisepsi, **Dezenfeksiyon, ** Mikrobisit, **Sterilizasyon).",
+                "options": ["Antisepsi", "Dezenfeksiyon", "Mikrobisit", "Sterilizasyon"],
+                "answer": "Sterilizasyon",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bir nesne veya yüzey üzerindeki mikroorganizmaların sayısını oldukça güvenli bir düzeye indirilmesi işlemine ne denir? (**Antisepsi, **Dezenfeksiyon, ** Sanitasyon, Sterilizasyon).",
+                "options": ["Antisepsi", "Dezenfeksiyon", "Sanitasyon", "Sterilizasyon"],
+                "answer": "Sanitasyon",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bakterileri öldüren kimyasal maddeye ne deni? (**Antisepsi, **Dezenfeksiyon, **Bakterisit, **Sterilizasyon).",
+                "options": ["Antisepsi", "Dezenfeksiyon", "Bakterisit", "Sterilizasyon"],
+                "answer": "Bakterisit",
+                "imageUrl": ""
+            },
+            {
+                "question": "Bakterilerin üreme ve gelişmelerini önleyen veya durduran kimyasal maddelere ne denir? (**Bakteriyoseptik, **Bakteriyolitik, **Bakterisitik, **Bakteriyostatik).",
+                "options": ["Bakteriyoseptik", "Bakteriyolitik", "Bakterisitik", "Bakteriyostatik"],
+                "answer": "Bakteriyostatik",
+                "imageUrl": ""
+            },
+            {
+                "question": "Kuru sıcak hava ile sterilizasyonda kullanılan cihazın ismi nedir? (**Pasteur Fırını, **Otoklav, **Kok kazanı, **Benmari).",
+                "options": ["Pasteur Fırını", "Otoklav", "Kok kazanı", "Benmari"],
+                "answer": "Pasteur Fırını",
+                "imageUrl": ""
+            },
+            {
+                "question": "Kuru sıcak hava ile sterilizasyonda kaç derecede 1 saat tutmak yeterlidir? (**120 derece, **150 derece, **170 derece, **190 derece).",
+                "options": ["120 derece", "150 derece", "170 derece", "190 derece"],
+                "answer": "170 derece",
+                "imageUrl": ""
+            },
+            {
+                "question": "Kuru sıcak hava ile sterilizasyonda 170 derecede ne kadar süre tutmak yeterlidir? Aşağıdakilerden en uygun cevabı işaretleyin. (**20 dakika, **45 dakika, **60 dakika, **90 dakika, **120 dakika).",
+                "options": ["20 dakika", "45 dakika", "60 dakika", "90 dakika", "120 dakika"],
+                "answer": "60 dakika",
+                "imageUrl": ""
+            },
+            {
+                "question": "Kuru sıcak hava ile sterilizasyonda ambalaj malzemelerinin yanması kaç derecenin üzerindeki sıcaklıklarda başlar? (**185 derece, **195 derece, **205 derece, **240 derece).",
+                "options": ["185 derece", "195 derece", "205 derece", "240 derece"],
+                "answer": "185 derece",
+                "imageUrl": ""
+            },
+            {
+                "question": "Basınçlı buhar ile sterilizasyonda, sterilizasyon cihazında yüzde (%) kaç nem sağlanmalıdır? (**%100 nem, **%90 nem, **%80 nem, **%70 nem).",
+                "options": ["%100 nem", "%90 nem", "%80 nem", "%70 nem"],
+                "answer": "%100 nem",
+                "imageUrl": ""
+            },
+            {
+                "question": "Nemli ısı ile sterilizasyon yöntemleri arasında bilinen sterilizasyon yöntemlerinden en etkili sterilizasyon yöntemi nedir? (**Basınçlı buhar, **Basınçsız buhar, **Kaynatma, **Tindalizasyon)",
+                "options": ["Basınçlı buhar", "Basınçsız buhar", "Kaynatma", "Tindalizasyon"],
+                "answer": "Basınçlı buhar",
+                "imageUrl": ""
+            },
+            {
+                "question": "Basınçlı Buhar ile Sterilizasyonda kullanılan cihazın ismi nedir? (**Benmari, **Pasteur Fırını, **Otoklav, **Kok kazanı).",
+                "options": ["Benmari", "Pasteur Fırını", "Otoklav", "Kok kazanı"],
+                "answer": "Otoklav",
+                "imageUrl": ""
+            },
+            {
+                "question": "Basınçlı Buhar ile Sterilizasyonda kaç derece sıcaklıkta 15-20 dakika tutmak yeterlidir? (**81 derece , **101 derece, **121 derece, **142 derece).",
+                "options": ["81 derece", "101 derece", "121 derece", "142 derece"],
+                "answer": "121 derece",
+                "imageUrl": ""
+            },
+            {
+                "question": "Otoklav ile sterilizasyonda 121 derecede en az kaç dakika uygulanır? (**35-40 dakika, **25-30 dakika, **15-20 dakika, **5-10 dakika)",
+                "options": ["35-40 dakika", "25-30 dakika", "15-20 dakika", "5-10 dakika"],
+                "answer": "15-20 dakika",
+                "imageUrl": ""
+            },
+            {
+                "question": "Sterilizasyonda; nemli ısının en kolay ve yaygın kullanış şekli nedir? (**Kaynatma, **Basınçlı buhar, **Basınçsız buhar, **Tindalizasyon)",
+                "options": ["Kaynatma", "Basınçlı buhar", "Basınçsız buhar", "Tindalizasyon"],
+                "answer": "Kaynatma",
+                "imageUrl": ""
+            },
+            {
+                "question": "Otoklav ile sterilizasyonda, sterilizasyon sonrası ani basınç düşürülmesi, içerisinde bulunan sıvı besi yerlerinde veya sıvı maddelerde neye yol açar?",
+                "options": ["Katılaşmaya yol açar", "Renk değişimine yol açar", "Sterilitenin bozulmasına yol açar", "Kaynamaya yol açar"],
+                "answer": "Kaynamaya yol açar",
+                "imageUrl": ""
+            },
+            {
+                "question": "Akım halindeki buhar ile sterilizasyonda kullanılan cihazın ismi nedir? Aşağıdakilerden en uygun cevabı işaretleyin. (**Pasteur Fırını, **Otoklav, **Kok kazanı, **Benmari).",
+                "options": ["Pasteur Fırını", "Otoklav", "Kok kazanı", "Benmari"],
+                "answer": "Kok kazanı",
+                "imageUrl": ""
+            },
+            {
+                "question": "Tindalizasyonda kullanılan cihazın ismi nedir? (**Pasteur Fırını, **Otoklav, **Kok kazanı, **Benmari).",
+                "options": ["Pasteur Fırını", "Otoklav", "Kok kazanı", "Benmari"],
+                "answer": "Benmari",
+                "imageUrl": ""
+            },
+            {
+                "question": "Yüksek ısıya dayanamayan kan serumunun ısı ile sterilizasyonunda hangi yöntem kullanılır? (**Tindalizasyon, **Kaynatma, **Basınçlı buhar, **Basınçsız buhar).",
+                "options": ["Tindalizasyon", "Kaynatma", "Basınçlı buhar", "Basınçsız buhar"],
+                "answer": "Tindalizasyon",
+                "imageUrl": ""
+            },
+            {
+                "question": "Sıvıların, 56-100 derece arasındaki sıcaklıkta 3 gün arka arkaya birer saat ısıtılarak steril edilme işlemine ne denilmektedir? (**Tindalizasyon, **Kaynatma, **Basınçlı buhar, **Basınçsız buhar).",
+                "options": ["Tindalizasyon", "Kaynatma", "Basınçlı buhar", "Basınçsız buhar"],
+                "answer": "Tindalizasyon",
+                "imageUrl": ""
+            },
+            {
+                "question": "Sütün 135-150 derece gibi çok yüksek sıcaklıkta 1-4 saniye ısıtılması ve aniden soğutulması ile yapılan sterilizasyon yönteminin ismi nedir? (**UTSH, **UTHS, **UHTS, USTH).",
+                "options": ["UTSH", "UTHS", "UHTS", "USTH"],
+                "answer": "UHTS",
+                "imageUrl": ""
+            },
+            {
+                "question": "Sterilizasyon sonrası sterilliğin uzun süre muhafazası için sterilizasyondan önce malzemeler ne yapılmalıdır? Aşağıdakilerden en uygun cevabı işaretleyin. (**Yıkama, **Durulama, **Ambalajlama, **Sterilizasyon).",
+                "options": ["Yıkama", "Durulama", "Ambalajlama", "Sterilizasyon"],
+                "answer": "Ambalajlama",
+                "imageUrl": ""
+            },
+            {
+                "question": "Kuru sıcak hava (Pastör fırını) ile sterilisazyonda malzemelerin ambalajlanmasında hangi ambalaj maddesi kullanılmaz? (**Pamuk, **Kâğıt, **Metal Konteyner, **Plastik konteyner, **Alüminyum folyo).",
+                "options": ["Pamuk", "Kâğıt", "Metal Konteyner", "Plastik konteyner", "Alüminyum folyo"],
+                "answer": "Plastik konteyner",
+                "imageUrl": ""
+            },
+            {
+                "question": "Aşağıdakilerden hangisi, sterilizasyonun kontrolünde kullanılan biyolojik indikatörler olarak kullanılan sporlu bakterilerdendir? (**Salmonella typhi, **Shigella dysenteriae, ** Bacillus sterotermophilus, **Staphylococcus aureus).",
+                "options": ["Salmonella typhi", "Shigella dysenteriae", "Bacillus sterotermophilus", "Staphylococcus aureus"],
+                "answer": "Bacillus sterotermophilus",
+                "imageUrl": ""
+            },
+            {
+                "question": "Sterilizasyonun kontrolünde kullanılan belli sıcaklıkta eriyen maddeleri içeren ve maddenin erimesi ile belirli sıcaklığa erişildiğini gösteren tüplerin ismi nedir? (**Termokopl, ** Sticker, ** Browne, **Termometre, ** Bowie**dick).",
+                "options": ["Termokopl", "Sticker", "Browne", "Termometre", "Bowie-dick"],
+                "answer": "Sticker",
+                "imageUrl": ""
+            },
+            {
+                "question": "İçinde renk değiştiren sıvılar bulunan tüplerin kullanıldığı sterilizasyon kontrol yöntemi nedir? (**Termokopl, ** Sticker, ** Browne, **Termometre, ** Bowie dick).",
+                "options": ["Termokopl", "Sticker", "Browne", "Termometre", "Bowie-dick"],
+                "answer": "Browne",
+                "imageUrl": ""
+            },
+            {
+                "question": "İç sıcaklığın sterilizasyon süresince dışarıdan kayıt edilerek izlenmesini sağlayan sterilizasyon kontrol yöntemi nedir? (**Termokopl, ** Sticker, ** Browne, **Termometre, ** Bowie**dick).",
+                "options": ["Termokopl", "Sticker", "Browne", "Termometre", "Bowie-dick"],
+                "answer": "Termokopl",
+                "imageUrl": ""
+            },
+            {
+                "question": "Buhar penetrasyonun ( içine sızmak) sağlanıp sağlanmadığını gösteren sterilizasyon kontrol yöntemi nedir? (**Termokopl, ** Sticker, ** Browne, **Termometre, ** Bowie-dick).",
+                "options": ["Termokopl", "Sticker", "Browne", "Termometre", "Bowie-dick"],
+                "answer": "Bowie-dick",
+                "imageUrl": ""
+            },
+            {
+                "question": "Sterilizasyonun kontrolünde kullanılan, sterilizasyon sırasında ulaşılan en yüksek sıcaklığı gösteren aletin ismi nedir? (**Termokopl, ** Sticker, ** Browne, ** Bowie-dick, **Maksimal Termometre).",
+                "options": ["Termokopl", "Sticker", "Browne", "Bowie-dick", "Maksimal Termometre"],
+                "answer": "Maksimal Termometre",
+                "imageUrl": ""
+            },
+            {
+                "question": "Hangi sterilizasyon yönteminde mikroorganizmalar öldürülmez? (**Kuru ısı, **Nemli ısı, **Filtrasyon, **Radyasyon).",
+                "options": ["Kuru ısı", "Nemli ısı", "Filtrasyon", "Radyasyon"],
+                "answer": "Filtrasyon",
+                "imageUrl": ""
+            },
+            {
+                "question": "Hangi tip filtreler diatom toprağından yapılmıştır? (**Membran Filtreler, **Seitz Filtreler, **Berkefeld Filtreler, **Silika Filtreler, **Pastör Filtreler).",
+                "options": ["Membran Filtreler", "Seitz Filtreler", "Berkefeld Filtreler", "Silika Filtreler", "Pastör Filtreler"],
+                "answer": "Berkefeld Filtreler",
+                "imageUrl": ""
+            },
+            {
+                "question": "Virüsleri de tutacak küçüklükte porları bulunan filitreler aşağıdakilerden hangisidir? (**Membran Filtreler, **Seitz Filtreler, **Berkefeld Filtreler, **Silika Filtreler, **Pastör Filtreler).",
+                "options": ["Membran Filtreler", "Seitz Filtreler", "Berkefeld Filtreler", "Silika Filtreler", "Pastör Filtreler"],
+                "answer": "Membran Filtreler",
+                "imageUrl": ""
+            },
+            {
+                "question": "Filtre tiplerinden hangisi asbestten yapılmıştır? (**Membran Filtreler, **Seitz Filtreler, **Berkefeld Filtreler, **Silika Filtreler, **Pastör Filtreler).",
+                "options": ["Membran Filtreler", "Seitz Filtreler", "Berkefeld Filtreler", "Silika Filtreler", "Pastör Filtreler"],
+                "answer": "Seitz Filtreler",
+                "imageUrl": ""
+            },
+            {
+                "question": "Aşağıdakilerden hangisi iyonize ışınlardan değildir? (**Ultraviyole ışınları, **X ışınları, **Alfa ışınları, **Beta ışınları, **Gama ışınları).",
+                "options": ["Ultraviyole ışınları", "X ışınları", "Alfa ışınları", "Beta ışınları", "Gama ışınları"],
+                "answer": "Ultraviyole ışınları",
+                "imageUrl": ""
+            },
+            {
+                "question": "……………………..= Sterilizasyon işlemlerinde en çok kullanılan ışınlarıdır. Ameliyat iplikleri, kataterler, şırıngalar gibi malzemeleri olduğu kadar yiyecek maddelerini steril etmek için de bu ışınlar kullanılır. (**Ultraviyole ışınları, **X ışınları, **Alfa ışınları, **Beta ışınları, **Gama ışınları).",
+                "options": ["Ultraviyole ışınları", "X ışınları", "Alfa ışınları", "Beta ışınları", "Gama ışınları"],
+                "answer": "Gama ışınları",
+                "imageUrl": ""
+            },
+            {
+                "question": "Ultraviyole ışınlarının mikroorganizmalara en etkili olduğu dalga boyu kaç nanometredir? (**253,7 nanometre, **263,7 nanometre, **273,7 nanometre, **283,7 nanometre, **293,7 nanometre).",
+                "options": ["253,7 nanometre", "263,7 nanometre", "273,7 nanometre", "283,7 nanometre", "293,7 nanometre"],
+                "answer": "253,7 nanometre",
+                "imageUrl": ""
+            },
+            {
+                "question": "Ambalaj sonrası sterilizasyona olanak sağlayan, katgüt, ipek, naylon cerrahi dikiş ipliklerinin, Protezlerin, Katederlerin ve benzeri malzemelerin sterilizasyonunda kullanılan yöntem aşağıdakilerden hangisidir? (**Nemli ısı, **Kuru ısı, **Kimyasal maddeler, ** Radyasyon).",
+                "options": ["Nemli ısı", "Kuru ısı", "Kimyasal maddeler", "Radyasyon"],
+                "answer": "Radyasyon",
+                "imageUrl": ""
+            },
+            {
+                "question": "Aşağıdakilerden hangisi, gazlarla yapılan sterilizasyonda kullanılır? (**Timol, **Etilen oksit, **Hidrojen peroksit, ** Gluteraldehid).",
+                "options": ["Timol", "Etilen oksit", "Hidrojen peroksit", "Gluteraldehid"],
+                "answer": "Etilen oksit",
+                "imageUrl": ""
+            },
+            {
+                "question": "UV lamba armatürleri havası dezenfekte edilecek odaların tavanına yerden en az kaç cm yukarıya duvara monte edilmelidir? (-180 cm, -190 cm, -200 cm, -210 cm, -220 cm).",
+                "options": ["-180 cm", "-190 cm", "-200 cm", "-210 cm", "-220 cm"],
+                "answer": "-210 cm",
+                "imageUrl": ""
+            }
+        ];
+
+        let dynamicQuestions = []; // Firebase'den yüklenecek sorular
 
         // EKRAN DEĞİŞTİRME FONKSİYONU
         function showScreen(screenName) {
@@ -1411,17 +2135,17 @@
                 
                 Object.values(screens).forEach(screen => {
                     screen.style.display = 'none';
-                    screen.classList.remove('active-screen');
+                    screen.classList.remove(CONSTANTS.CSS_CLASSES.ACTIVE_SCREEN);
                 });
                 
                 screens[screenName].style.display = 'block';
-                screens[screenName].classList.add('active-screen');
+                screens[screenName].classList.add(CONSTANTS.CSS_CLASSES.ACTIVE_SCREEN);
                 
-                document.getElementById('restartGameBtn').style.display = 
-                    screenName === 'quiz' ? 'flex' : 'none';
+                domElements.restartGameBtn.style.display = 
+                    screenName === CONSTANTS.SCREEN_NAMES.QUIZ ? 'flex' : 'none';
                 
             } catch(err) {
-                showError(`Ekran değiştirilirken hata oluştu: ${err.message}`);
+                showFeedback(`${CONSTANTS.UI_TEXT.SCREEN_CHANGE_ERROR}${err.message}`, 'error');
             }
         }
 
@@ -1430,52 +2154,87 @@
             if(!soundEnabled) return;
             
             const soundMap = {
-                correct: 'https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3',
-                wrong: 'https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3',
-                complete: 'https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3'
+                correct: CONSTANTS.SOUND_FILES.CORRECT,
+                wrong: CONSTANTS.SOUND_FILES.WRONG,
+                complete: CONSTANTS.SOUND_FILES.COMPLETE
             };
             
             if(soundMap[type]) {
-                new Audio(soundMap[type]).play().catch(e => logDebug("Ses çalınamadı: " + e));
+                new Audio(soundMap[type]).play().catch(e => logDebug(CONSTANTS.UI_TEXT.SOUND_PLAY_ERROR + e));
             }
         }
 
         // TEMA DEĞİŞTİR
         function toggleTheme() {
-            const html = document.documentElement;
-            const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
+            const newTheme = domElements.html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            domElements.html.setAttribute('data-theme', newTheme);
+            localStorage.setItem(CONSTANTS.LOCAL_STORAGE_KEYS.THEME, newTheme);
+            domElements.themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️'; // Update icon
         }
 
         // SES AÇ/KAPA
         function toggleSound() {
             soundEnabled = !soundEnabled;
-            document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
-            localStorage.setItem('soundEnabled', soundEnabled);
+            domElements.soundToggle.textContent = soundEnabled ? CONSTANTS.UI_TEXT.SOUND_ON : CONSTANTS.UI_TEXT.SOUND_OFF;
+            localStorage.setItem(CONSTANTS.LOCAL_STORAGE_KEYS.SOUND_ENABLED, soundEnabled);
+            if (soundEnabled) {
+                domElements.soundToggle.classList.add('icon-wiggle');
+            } else {
+                domElements.soundToggle.classList.remove('icon-wiggle');
+            }
         }
 
         // ŞIKLARI KARIŞTIR
-        function shuffleOptions(options) {
-            return [...options].sort(() => Math.random() - 0.5);
+        function shuffleOptions(optionsArray) {
+            return [...optionsArray].sort(() => Math.random() - 0.5);
         }
 
         // SORULARI HAZIRLA
         function prepareQuestions(mode) {
             let preparedQuestions = [];
-            
-            switch(mode) {
-                case 'normal':
-                    preparedQuestions = originalQuestions;
-                    break;
-                case 'shuffled':
-                    preparedQuestions = shuffleOptions(originalQuestions);
-                    break;
-                case 'fast':
-                    preparedQuestions = shuffleOptions(originalQuestions).slice(0, 10);
-                    break;
+
+            if (mode === CONSTANTS.MODES.STERILIZATION) {
+                const numSterilizationQuestions = 42; // These are the last 42 questions added to originalQuestions
+                if (originalQuestions.length >= numSterilizationQuestions) {
+                    const sterilizationOnlyQuestions = originalQuestions.slice(originalQuestions.length - numSterilizationQuestions);
+                    // Double check if slice resulted in empty when it shouldn't (e.g. if numSterilizationQuestions was 0)
+                    if (sterilizationOnlyQuestions.length === 0 && numSterilizationQuestions > 0) {
+                         showFeedback(`Sterilizasyon soruları alınırken bir hata oluştu (beklenen ${numSterilizationQuestions}, alınan 0).`, 'error');
+                         return []; // Return empty list
+                    }
+                    preparedQuestions = shuffleOptions(sterilizationOnlyQuestions);
+                } else {
+                    showFeedback(`Sterilizasyon modu için ${numSterilizationQuestions} adet özel soru bulunamadı. Mevcut statik soru sayısı: ${originalQuestions.length}.`, 'error');
+                    return []; // Return empty list on error
+                }
+            } else {
+                // Logic for other modes (NORMAL, SHUFFLED, FAST, default)
+                const allAvailableQuestions = [...originalQuestions, ...dynamicQuestions];
+                
+                if (allAvailableQuestions.length === 0) {
+                    showFeedback(CONSTANTS.UI_TEXT.NO_QUESTIONS_FOUND, 'error');
+                    return []; // Return empty list if no questions for these modes
+                }
+
+                switch(mode) {
+                    case CONSTANTS.MODES.NORMAL:
+                        preparedQuestions = allAvailableQuestions;
+                        break;
+                    case CONSTANTS.MODES.SHUFFLED:
+                        preparedQuestions = shuffleOptions(allAvailableQuestions);
+                        break;
+                    case CONSTANTS.MODES.FAST:
+                        const fastModeCount = Math.min(10, allAvailableQuestions.length);
+                        preparedQuestions = shuffleOptions(allAvailableQuestions).slice(0, fastModeCount);
+                        break;
+                    default: // Catches any other mode, treats it like NORMAL
+                        preparedQuestions = allAvailableQuestions;
+                        break;
+                }
             }
             
+            // The map operation is applied to whatever 'preparedQuestions' list was formed.
+            // If an error path returned [], this map will correctly process an empty array and return [].
             return preparedQuestions.map(q => ({
                 ...q,
                 options: shuffleOptions(q.options)
@@ -1485,36 +2244,50 @@
         // SORU YÜKLE
         function loadQuestion() {
             try {
-                const question = questions[currentQuestionIndex];
-                const optionsDiv = document.getElementById('options');
+                const questionData = questions[currentQuestionIndex];
                 
-                document.getElementById('question').textContent = 
-                    `Soru ${currentQuestionIndex + 1}/${questions.length}: ${question.question}`;
+                // Soru metnini göster
+                domElements.question.textContent = 
+                    `Soru ${currentQuestionIndex + 1}/${questions.length}: ${questionData.question}`;
                 
-                optionsDiv.innerHTML = '';
+                // Görsel kontrolü
+                const imageContainer = document.getElementById('questionImageContainer');
+                const questionImage = document.getElementById('questionImage');
                 
-                question.options.forEach(option => {
+                // Görsel varsa göster, yoksa gizle
+                if (questionData.imageUrl && questionData.imageUrl.trim() !== '') {
+                    questionImage.src = questionData.imageUrl;
+                    imageContainer.style.display = 'block';
+                } else {
+                    imageContainer.style.display = 'none';
+                    questionImage.src = '';
+                }
+
+                // Seçenekleri göster
+                domElements.options.innerHTML = '';
+                
+                questionData.options.forEach(optionText => {
                     const div = document.createElement('div');
-                    div.className = 'option';
+                    div.className = CONSTANTS.CSS_CLASSES.OPTION;
                     
                     if(userAnswers[currentQuestionIndex]) {
-                        div.classList.add('disabled');
-                        if(option === question.answer) div.classList.add('correct');
-                        if(option === userAnswers[currentQuestionIndex].selected && !userAnswers[currentQuestionIndex].isCorrect) {
-                            div.classList.add('wrong');
+                        div.classList.add(CONSTANTS.CSS_CLASSES.DISABLED);
+                        if(optionText === questionData.answer) div.classList.add(CONSTANTS.CSS_CLASSES.CORRECT);
+                        if(optionText === userAnswers[currentQuestionIndex].selected && !userAnswers[currentQuestionIndex].isCorrect) {
+                            div.classList.add(CONSTANTS.CSS_CLASSES.WRONG);
                         }
                     }
                     
-                    div.textContent = option;
-                    div.addEventListener('click', () => selectAnswer(option, question.answer));
-                    optionsDiv.appendChild(div);
+                    div.textContent = optionText;
+                    div.addEventListener('click', () => selectAnswer(optionText, questionData.answer));
+                    domElements.options.appendChild(div);
                 });
                 
                 updateProgress();
                 updateNavigation();
                 
             } catch(err) {
-                showError(`Soru yüklenirken hata oluştu: ${err.message}`);
+                showFeedback(`${CONSTANTS.UI_TEXT.QUESTION_LOAD_ERROR}${err.message}`, 'error');
             }
         }
 
@@ -1525,10 +2298,10 @@
                 questions = prepareQuestions(mode);
                 currentQuestionIndex = 0;
                 userAnswers = {};
-                showScreen('quiz');
+                showScreen(CONSTANTS.SCREEN_NAMES.QUIZ);
                 loadQuestion();
             } catch(err) {
-                showError(`Quiz başlatılırken hata oluştu: ${err.message}`);
+                showFeedback(`${CONSTANTS.UI_TEXT.QUIZ_START_ERROR}${err.message}`, 'error');
             }
         }
 
@@ -1540,31 +2313,31 @@
                 const isCorrect = selected === correctAnswer;
                 userAnswers[currentQuestionIndex] = { selected, isCorrect };
                 
-                document.querySelectorAll('.option').forEach(option => {
-                    option.classList.add('disabled');
-                    if(option.textContent === correctAnswer) option.classList.add('correct');
-                    if(option.textContent === selected && !isCorrect) option.classList.add('wrong');
+                domElements.options.querySelectorAll('.' + CONSTANTS.CSS_CLASSES.OPTION).forEach(optionNode => {
+                    optionNode.classList.add(CONSTANTS.CSS_CLASSES.DISABLED);
+                    if(optionNode.textContent === correctAnswer) optionNode.classList.add(CONSTANTS.CSS_CLASSES.CORRECT);
+                    if(optionNode.textContent === selected && !isCorrect) optionNode.classList.add(CONSTANTS.CSS_CLASSES.WRONG);
                 });
                 
-                document.getElementById('nextBtn').classList.remove('next-btn-disabled');
+                domElements.nextBtn.classList.remove(CONSTANTS.CSS_CLASSES.NEXT_BTN_DISABLED);
                 playSound(isCorrect ? 'correct' : 'wrong');
                 
             } catch(err) {
-                showError(`Cevap seçilirken hata oluştu: ${err.message}`);
+                showFeedback(`${CONSTANTS.UI_TEXT.ANSWER_SELECT_ERROR}${err.message}`, 'error');
             }
         }
 
         // İLERLEME ÇUBUĞU
         function updateProgress() {
             const progress = ((currentQuestionIndex + 1) / questions.length * 100).toFixed(1);
-            document.getElementById('progressBar').style.width = `${progress}%`;
+            domElements.progressBar.style.width = `${progress}%`;
         }
 
         // NAVİGASYON
         function updateNavigation() {
-            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
-            document.getElementById('nextBtn').textContent = 
-                currentQuestionIndex === questions.length - 1 ? 'Bitir' : 'İleri';
+            domElements.prevBtn.disabled = currentQuestionIndex === 0;
+            domElements.nextBtn.textContent = 
+                currentQuestionIndex === questions.length - 1 ? CONSTANTS.UI_TEXT.FINISH : CONSTANTS.UI_TEXT.NEXT;
         }
 
         // ÖNCEKİ SORU
@@ -1577,11 +2350,9 @@
 
         // SONRAKİ SORU
         function nextQuestion() {
-            const nextBtn = document.getElementById('nextBtn');
-            
             if(!userAnswers[currentQuestionIndex]) {
-                nextBtn.classList.add('shake-animation');
-                setTimeout(() => nextBtn.classList.remove('shake-animation'), 500);
+                domElements.nextBtn.classList.add(CONSTANTS.CSS_CLASSES.SHAKE_ANIMATION);
+                setTimeout(() => domElements.nextBtn.classList.remove(CONSTANTS.CSS_CLASSES.SHAKE_ANIMATION), 500);
                 return;
             }
             
@@ -1612,15 +2383,17 @@
                         const updateRef = window.firebaseDatabase.ref(window.firebaseDatabase.db, `scores/${existingScore.key}`);
                         await window.firebaseDatabase.set(updateRef, scoreData);
                         currentPlayerScoreId = existingScore.key;
+                    } else { // Oyuncunun mevcut skoru daha yüksekse veya eşitse, ID'yi koru ama güncelleme yapma
+                        currentPlayerScoreId = existingScore.key;
                     }
                 } else {
                     const newScoreRef = window.firebaseDatabase.push(scoresRef);
                     currentPlayerScoreId = newScoreRef.key;
                     await window.firebaseDatabase.set(newScoreRef, scoreData);
                 }
-                
             } catch(error) {
-                throw error;
+                showFeedback(`${CONSTANTS.UI_TEXT.SHOW_RESULTS_ERROR} (Firebase: ${error.message})`, 'error');
+                throw error; // Hatanın yukarı yayılmasını sağla
             }
         }
 
@@ -1629,18 +2402,18 @@
             try {
                 const scoresRef = window.firebaseDatabase.ref(window.firebaseDatabase.db, 'scores');
                 const snapshot = await window.firebaseDatabase.get(scoresRef);
-                const scores = [];
+                const scoresData = [];
                 
                 snapshot.forEach((childSnapshot) => {
-                    scores.push({
+                    scoresData.push({
                         id: childSnapshot.key,
                         ...childSnapshot.val()
                     });
                 });
-                return scores;
-                
+                return scoresData;
             } catch(error) {
-                throw error;
+                showFeedback(`${CONSTANTS.UI_TEXT.SCOREBOARD_LOAD_ERROR} (Firebase: ${error.message})`, 'error');
+                throw error; // Hatanın yukarı yayılmasını sağla
             }
         }
 
@@ -1648,6 +2421,9 @@
         function formatDate(timestamp) {
             try {
                 const date = new Date(Number(timestamp));
+                if (isNaN(date.getTime())) { // Geçersiz tarih kontrolü
+                    return CONSTANTS.UI_TEXT.UNKNOWN_DATE;
+                }
                 return date.toLocaleDateString('tr-TR', {
                     day: '2-digit',
                     month: '2-digit',
@@ -1656,7 +2432,7 @@
                     minute: '2-digit'
                 });
             } catch {
-                return "Bilinmeyen Tarih";
+                return CONSTANTS.UI_TEXT.UNKNOWN_DATE;
             }
         }
 
@@ -1674,40 +2450,39 @@
                     timestamp: Date.now()
                 };
                 
-                await saveScoreToFirebase(newScore);
-                await updateScoreboard();
+                await saveScoreToFirebase(newScore); 
+                await updateScoreboard(); 
                 
-                document.getElementById('scoreText').innerHTML = `
+                domElements.scoreText.innerHTML = `
                     <p>Oyuncu: <strong>${playerName}</strong></p>
                     <p>Mod: <strong>${getModeName(currentMode)}</strong></p>
                     <p>Toplam Soru: ${totalQuestions}</p>
                     <p>Doğru Cevaplar: ${correctAnswers}</p>
-                    <p>Başarı Oranı: <strong>${((correctAnswers / totalQuestions) * 100).toFixed(1)}%</strong></p>
+                    <p>Başarı Oranı: <strong>${totalQuestions > 0 ? ((correctAnswers / totalQuestions) * 100).toFixed(1) : 0}%</strong></p>
                 `;
                 
-                showScreen('result');
-                playSound(correctAnswers === totalQuestions ? 'correct' : 'complete');
+                showScreen(CONSTANTS.SCREEN_NAMES.RESULT);
+                playSound(correctAnswers === totalQuestions && totalQuestions > 0 ? 'correct' : 'complete');
                 
             } catch(err) {
-                showError(`Sonuçlar gösterilirken hata oluştu: ${err.message}`);
+                showFeedback(`${CONSTANTS.UI_TEXT.SHOW_RESULTS_ERROR}${err.message}`, 'error');
             }
         }
 
         // SKOR TABLOSUNU GÜNCELLE
         async function updateScoreboard() {
             try {
-                document.getElementById('loadingScores').style.display = 'block';
-                const scores = await loadScoresFromFirebase();
+                domElements.loadingScores.style.display = 'block';
+                const scoresData = await loadScoresFromFirebase();
                 
-                scores.sort((a, b) => b.score - a.score || b.timestamp - a.timestamp);
+                scoresData.sort((a, b) => b.score - a.score || b.timestamp - a.timestamp);
                 
-                const tbody = document.getElementById('scoreboardBody');
-                tbody.innerHTML = '';
+                domElements.scoreboardBody.innerHTML = '';
                 
-                scores.forEach((score, index) => {
+                scoresData.forEach((score, index) => {
                     const row = document.createElement('tr');
                     if(score.id === currentPlayerScoreId) {
-                        row.classList.add('current-player');
+                        row.classList.add(CONSTANTS.CSS_CLASSES.CURRENT_PLAYER);
                     }
                     
                     row.innerHTML = `
@@ -1717,50 +2492,53 @@
                         <td>${getModeName(score.mode)}</td>
                         <td>${formatDate(score.timestamp)}</td>
                     `;
-                    tbody.appendChild(row);
+                    domElements.scoreboardBody.appendChild(row);
                 });
                 
-                document.getElementById('loadingScores').style.display = 'none';
+                domElements.loadingScores.style.display = 'none';
                 
             } catch(err) {
-                showError("Skor tablosu yüklenirken hata oluştu!");
+                // loadScoresFromFirebase already calls showFeedback
+                // showFeedback(CONSTANTS.UI_TEXT.SCOREBOARD_LOAD_ERROR);
+                domElements.loadingScores.style.display = 'none'; // Yükleniyor mesajını gizle
             }
         }
 
         // MOD ADLARI
         function getModeName(mode) {
             return {
-                'normal': 'Sıralı Mod',
-                'shuffled': 'Karışık Mod',
-                'fast': 'Hızlı Mod'
+                [CONSTANTS.MODES.NORMAL]: 'Sıralı Mod',
+                [CONSTANTS.MODES.SHUFFLED]: 'Karışık Mod',
+                [CONSTANTS.MODES.FAST]: 'Hızlı Mod',
+                [CONSTANTS.MODES.STERILIZATION]: 'Sterilizasyon Mod'
             }[mode] || mode;
         }
 
         // OYUNCU ADINI KAYDET
         function savePlayerName() {
             try {
-                playerName = document.getElementById('playerNameInput').value.trim();
+                playerName = domElements.playerNameInput.value.trim();
                 
                 if(!playerName) {
-                    showError("Lütfen bir isim girin!");
+                    showFeedback(CONSTANTS.UI_TEXT.INVALID_NAME_ERROR, 'error');
                     return false;
                 }
                 
                 playerName = playerName.substring(0, 20);
-                showScreen('mode');
+                showScreen(CONSTANTS.SCREEN_NAMES.MODE);
                 return true;
                 
             } catch(err) {
-                showError(`İsim kaydedilirken hata oluştu: ${err.message}`);
+                showFeedback(`${CONSTANTS.UI_TEXT.SAVING_NAME_ERROR}${err.message}`, 'error');
                 return false;
             }
         }
 
         // OYUNU SIFIRLA
         function resetGame() {
-            if(confirm("Oyunu sıfırlamak istediğinize emin misiniz?")) {
-                showScreen('name');
-                document.getElementById('playerNameInput').value = '';
+            if(confirm(CONSTANTS.UI_TEXT.CONFIRM_RESET_GAME)) {
+                showScreen(CONSTANTS.SCREEN_NAMES.NAME);
+                domElements.playerNameInput.value = '';
                 currentQuestionIndex = 0;
                 userAnswers = {};
                 currentPlayerScoreId = null;
@@ -1772,98 +2550,465 @@
             try {
                 if(!isAdmin) return;
                 
-                if(confirm("Tüm skorları temizlemek istediğinize emin misiniz?")) {
+                if(confirm(CONSTANTS.UI_TEXT.CONFIRM_CLEAR_SCORES)) {
                     const scoresRef = window.firebaseDatabase.ref(window.firebaseDatabase.db, 'scores');
                     await window.firebaseDatabase.remove(scoresRef);
-                    await updateScoreboard();
+                    await updateScoreboard(); 
                 }
             } catch(err) {
-                showError(`Skorlar temizlenirken hata oluştu: ${err.message}`);
+                showFeedback(`${CONSTANTS.UI_TEXT.CLEAR_SCORES_ERROR}${err.message}`, 'error');
             }
         }
 
+        let previousScreenBeforeAdmin = CONSTANTS.SCREEN_NAMES.NAME; // Admin ekranına geçmeden önceki ekranı sakla
+
         function setupAdminPanel() {
-            const adminPanel = document.getElementById('adminPanel');
-            const adminToggle = document.getElementById('adminToggle');
-            const adminLoginBtn = document.getElementById('adminLoginBtn');
-            const adminControls = document.getElementById('adminControls');
-            const clearScoresBtn = document.getElementById('clearScoresBtn');
-            const logoutBtn = document.getElementById('logoutBtn');
-            const adminPassword = document.getElementById('adminPassword');
-            
-            adminToggle.addEventListener('click', () => {
-                adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
-            });
-            
-            adminLoginBtn.addEventListener('click', async () => {
-                if(adminPassword.value === ADMIN_PASSWORD) {
-                    isAdmin = true;
-                    adminControls.style.display = 'block';
-                    adminLoginBtn.style.display = 'none';
-                    adminPassword.style.display = 'none';
-                    await updateScoreboard();
+            domElements.adminToggle.addEventListener('click', () => {
+                const currentActiveScreen = Object.keys(screens).find(key => screens[key].style.display === 'block' || screens[key].classList.contains(CONSTANTS.CSS_CLASSES.ACTIVE_SCREEN));
+
+                if (currentActiveScreen === CONSTANTS.SCREEN_NAMES.ADMIN) {
+                    // Admin ekranındaysak, önceki ekrana dön
+                    showScreen(previousScreenBeforeAdmin || CONSTANTS.SCREEN_NAMES.NAME);
+                    domElements.adminToggle.textContent = '🔒'; // Kilidi kapalı göster
+                    domElements.adminToggle.classList.add('icon-jiggle-hover'); // Add jiggle on lock
+                    domElements.adminToggle.classList.remove('icon-rotate-hover'); // Ensure rotate is not present
                 } else {
-                    showError("Hatalı şifre!");
-                    adminPassword.value = '';
+                    // Admin ekranında değilsek, geçmeden önce mevcut ekranı kaydet
+                    if (currentActiveScreen) {
+                        previousScreenBeforeAdmin = currentActiveScreen;
+                    }
+                    showScreen(CONSTANTS.SCREEN_NAMES.ADMIN);
+                    domElements.adminToggle.textContent = '❮'; // Geri ok göster (eskiden ᐊ)
+                    domElements.adminToggle.classList.remove('icon-jiggle-hover'); // Remove jiggle on back arrow
+                    domElements.adminToggle.classList.remove('icon-rotate-hover'); // Ensure rotate is not present
+                    // Admin ekranı açıldığında, eğer zaten admin girişi yapılmışsa soruları render et
+                    if (isAdmin && domElements.existingQuestionsList) {
+                        renderExistingQuestions();
+                    }
+                    if(!isAdmin && domElements.adminPasswordInput) {
+                        domElements.adminPasswordInput.focus(); // Şifre alanına odaklan
+                    }
                 }
             });
             
-            logoutBtn.addEventListener('click', () => {
-                isAdmin = false;
-                adminControls.style.display = 'none';
-                adminLoginBtn.style.display = 'block';
-                adminPassword.style.display = 'block';
-                adminPassword.value = '';
+            domElements.adminLoginBtn.addEventListener('click', async () => {
+                if (!domElements.adminPasswordInput || !domElements.adminControls) return;
+
+                if(domElements.adminPasswordInput.value === CONSTANTS.ADMIN_PASSWORD_VALUE) {
+                    isAdmin = true;
+                    // Giriş başarılı, admin kontrollerini adminPanel içine yükle
+                    domElements.adminPasswordInput.style.display = 'none';
+                    domElements.adminLoginBtn.style.display = 'none';
+                    domElements.adminControls.style.display = 'block'; // adminControls div'ini göster
+
+                    const adminControlsHTML = `
+                        <button class="admin-btn" id="${CONSTANTS.ELEMENT_IDS.CLEAR_SCORES_BTN}">Skorları Temizle</button>
+                        <button class="admin-btn" id="${CONSTANTS.ELEMENT_IDS.LOGOUT_BTN}" style="background-color: #c0392b; margin-top:10px;">Çıkış Yap</button>
+                        
+                        <hr class="admin-section-divider">
+                        <h4 class="admin-subtitle">Yeni Soru Ekle</h4>
+                        <div id="${CONSTANTS.ELEMENT_IDS.ADD_QUESTION_FORM}">
+                            <input type="text" id="${CONSTANTS.ELEMENT_IDS.NEW_QUESTION_TEXT}" class="admin-input" placeholder="Soru Metni">
+                            <input type="text" id="${CONSTANTS.ELEMENT_IDS.NEW_OPTION_1}" class="admin-input" placeholder="Seçenek 1">
+                            <input type="text" id="${CONSTANTS.ELEMENT_IDS.NEW_OPTION_2}" class="admin-input" placeholder="Seçenek 2">
+                            <input type="text" id="${CONSTANTS.ELEMENT_IDS.NEW_OPTION_3}" class="admin-input" placeholder="Seçenek 3">
+                            <input type="text" id="${CONSTANTS.ELEMENT_IDS.NEW_OPTION_4}" class="admin-input" placeholder="Seçenek 4">
+                            <input type="text" id="${CONSTANTS.ELEMENT_IDS.NEW_QUESTION_IMAGE_URL}" class="admin-input" placeholder="Soru Görsel URL (isteğe bağlı)">
+                            <select id="${CONSTANTS.ELEMENT_IDS.NEW_CORRECT_ANSWER_INDEX}" class="admin-input">
+                                <option value="0">Seçenek 1 Doğru</option>
+                                <option value="1">Seçenek 2 Doğru</option>
+                                <option value="2">Seçenek 3 Doğru</option>
+                                <option value="3">Seçenek 4 Doğru</option>
+                            </select>
+                            <button class="admin-btn" id="${CONSTANTS.ELEMENT_IDS.SAVE_QUESTION_BTN}">Soruyu Kaydet</button>
+                            <p id="${CONSTANTS.ELEMENT_IDS.ADD_QUESTION_STATUS}"></p>
+                        </div>
+
+                        <hr class="admin-section-divider">
+                        <h4 class="admin-subtitle">Mevcut Sorular (<span id="dynamicQuestionCount">0</span>)</h4>
+                        <div id="${CONSTANTS.ELEMENT_IDS.EXISTING_QUESTIONS_SECTION}">
+                            <div id="${CONSTANTS.ELEMENT_IDS.EXISTING_QUESTIONS_LIST}">Yükleniyor...</div>
+                        </div>
+                    `;
+                    domElements.adminControls.innerHTML = adminControlsHTML;
+
+                    // DOM elementlerini ata (artık adminControls içinde oldukları için)
+                    domElements.clearScoresBtn = document.getElementById(CONSTANTS.ELEMENT_IDS.CLEAR_SCORES_BTN);
+                    domElements.logoutBtn = document.getElementById(CONSTANTS.ELEMENT_IDS.LOGOUT_BTN);
+                    domElements.addQuestionForm = document.getElementById(CONSTANTS.ELEMENT_IDS.ADD_QUESTION_FORM);
+                    domElements.newQuestionText = document.getElementById(CONSTANTS.ELEMENT_IDS.NEW_QUESTION_TEXT);
+                    domElements.newOption1 = document.getElementById(CONSTANTS.ELEMENT_IDS.NEW_OPTION_1);
+                    domElements.newOption2 = document.getElementById(CONSTANTS.ELEMENT_IDS.NEW_OPTION_2);
+                    domElements.newOption3 = document.getElementById(CONSTANTS.ELEMENT_IDS.NEW_OPTION_3);
+                    domElements.newOption4 = document.getElementById(CONSTANTS.ELEMENT_IDS.NEW_OPTION_4);
+                    domElements.newCorrectAnswerIndex = document.getElementById(CONSTANTS.ELEMENT_IDS.NEW_CORRECT_ANSWER_INDEX);
+                    domElements.newQuestionImageUrl = document.getElementById(CONSTANTS.ELEMENT_IDS.NEW_QUESTION_IMAGE_URL);
+                    domElements.saveQuestionBtn = document.getElementById(CONSTANTS.ELEMENT_IDS.SAVE_QUESTION_BTN);
+                    domElements.addQuestionStatus = document.getElementById(CONSTANTS.ELEMENT_IDS.ADD_QUESTION_STATUS);
+                    domElements.existingQuestionsSection = document.getElementById(CONSTANTS.ELEMENT_IDS.EXISTING_QUESTIONS_SECTION);
+                    domElements.existingQuestionsList = document.getElementById(CONSTANTS.ELEMENT_IDS.EXISTING_QUESTIONS_LIST);
+
+                    // Event listener'ları ata
+                    domElements.clearScoresBtn.addEventListener('click', clearAllScores);
+                    domElements.logoutBtn.addEventListener('click', () => {
+                        isAdmin = false;
+                        domElements.adminControls.style.display = 'none';
+                        domElements.adminControls.innerHTML = ''; 
+                        domElements.adminPasswordInput.value = '';
+                        domElements.adminPasswordInput.style.display = 'block';
+                        domElements.adminLoginBtn.style.display = 'block';
+                        showScreen(CONSTANTS.SCREEN_NAMES.NAME); // Çıkışta isim ekranına dön
+                        domElements.adminToggle.textContent = '🔒'; // Kilidi kapalı göster
+                        domElements.adminToggle.classList.add('icon-jiggle-hover'); // Add jiggle on lock
+                        domElements.adminToggle.classList.remove('icon-rotate-hover');
+                    });
+                    domElements.saveQuestionBtn.addEventListener('click', handleSaveOrUpdateQuestion);
+                    
+                    await updateScoreboard(); // Skorları yükle/güncelle
+                    await loadDynamicQuestions(); // Soruları yükle (bu renderExistingQuestions'ı çağırır)
+                    domElements.adminToggle.textContent = '❮'; // Admin giriş yapmışsa da geri ok göster (eskiden ᐊ)
+                    domElements.adminToggle.classList.remove('icon-jiggle-hover'); // Remove jiggle on back arrow
+                    domElements.adminToggle.classList.remove('icon-rotate-hover');
+                } else {
+                    showFeedback(CONSTANTS.UI_TEXT.INVALID_PASSWORD_ERROR, 'error');
+                    if (domElements.adminPasswordInput) domElements.adminPasswordInput.value = '';
+                }
             });
-            
-            clearScoresBtn.addEventListener('click', clearAllScores);
         }
 
         // AYARLARI YÜKLE
         function loadSettings() {
             try {
-                const savedTheme = localStorage.getItem('theme') || 'light';
-                document.documentElement.setAttribute('data-theme', savedTheme);
+                const savedTheme = localStorage.getItem(CONSTANTS.LOCAL_STORAGE_KEYS.THEME) || 'light';
+                domElements.html.setAttribute('data-theme', savedTheme);
+                domElements.themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️'; // Set initial theme icon
                 
-                const savedSound = localStorage.getItem('soundEnabled') !== 'false';
+                const savedSound = localStorage.getItem(CONSTANTS.LOCAL_STORAGE_KEYS.SOUND_ENABLED) !== 'false';
                 soundEnabled = savedSound;
-                document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+                domElements.soundToggle.textContent = soundEnabled ? CONSTANTS.UI_TEXT.SOUND_ON : CONSTANTS.UI_TEXT.SOUND_OFF;
+                if (soundEnabled) { // Set initial sound icon wiggle
+                    domElements.soundToggle.classList.add('icon-wiggle');
+                } else {
+                    domElements.soundToggle.classList.remove('icon-wiggle');
+                }
+
+                // Set initial admin toggle state (it defaults to lock)
+                domElements.adminToggle.classList.add('icon-jiggle-hover');
                 
             } catch(err) {
-                console.error("Ayarlar yüklenemedi:", err);
+                console.error(CONSTANTS.UI_TEXT.SETTINGS_LOAD_ERROR, err);
+                 // Kullanıcıya bir hata mesajı göstermek isteyebilirsiniz, ancak bu genellikle kritik değildir.
             }
         }
 
         // EVENT LISTENER'LARI AYARLA
         function setupEventListeners() {
-            document.getElementById('continueBtn').addEventListener('click', savePlayerName);
-            document.getElementById('playerNameInput').addEventListener('keypress', e => {
+            domElements.continueBtn.addEventListener('click', savePlayerName);
+            domElements.playerNameInput.addEventListener('keypress', e => {
                 if(e.key === 'Enter') savePlayerName();
             });
             
-            document.getElementById('normalModeBtn').addEventListener('click', () => startQuiz('normal'));
-            document.getElementById('shuffledModeBtn').addEventListener('click', () => startQuiz('shuffled'));
-            document.getElementById('fastModeBtn').addEventListener('click', () => startQuiz('fast'));
+            domElements.normalModeBtn.addEventListener('click', () => startQuiz(CONSTANTS.MODES.NORMAL));
+            domElements.shuffledModeBtn.addEventListener('click', () => startQuiz(CONSTANTS.MODES.SHUFFLED));
+            domElements.fastModeBtn.addEventListener('click', () => startQuiz(CONSTANTS.MODES.FAST));
+            domElements.sterilizationModeBtn.addEventListener('click', () => startQuiz(CONSTANTS.MODES.STERILIZATION));
             
-            document.getElementById('prevBtn').addEventListener('click', prevQuestion);
-            document.getElementById('nextBtn').addEventListener('click', nextQuestion);
-            document.getElementById('restartBtn').addEventListener('click', () => showScreen('mode'));
-            document.getElementById('soundToggle').addEventListener('click', toggleSound);
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-            document.getElementById('restartGameBtn').addEventListener('click', resetGame);
+            domElements.prevBtn.addEventListener('click', prevQuestion);
+            domElements.nextBtn.addEventListener('click', nextQuestion);
+            domElements.restartBtn.addEventListener('click', () => showScreen(CONSTANTS.SCREEN_NAMES.MODE));
+            domElements.soundToggle.addEventListener('click', toggleSound);
+            domElements.themeToggle.addEventListener('click', toggleTheme);
+            domElements.restartGameBtn.addEventListener('click', resetGame);
         }
 
         // UYGULAMAYI BAŞLAT
-        function initApp() {
+        async function initApp() {
+            domElements.adminScreen = document.getElementById(CONSTANTS.ELEMENT_IDS.ADMIN_SCREEN);
+            screens[CONSTANTS.SCREEN_NAMES.ADMIN] = domElements.adminScreen;
+            domElements.questionImageContainer = document.getElementById(CONSTANTS.ELEMENT_IDS.QUESTION_IMAGE_CONTAINER);
+            domElements.questionImage = document.getElementById(CONSTANTS.ELEMENT_IDS.QUESTION_IMAGE);
+            domElements.sterilizationModeBtn = document.getElementById(CONSTANTS.ELEMENT_IDS.STERILIZATION_MODE_BTN); // Yeni buton initialize edildi
+
+            await loadDynamicQuestions();
             loadSettings();
             setupEventListeners();
             setupAdminPanel();
-            showScreen('name');
-            document.getElementById('playerNameInput').focus();
+            showScreen(CONSTANTS.SCREEN_NAMES.NAME);
+            domElements.playerNameInput.focus();
+        }
+
+        // Firebase'den dinamik soruları yükle
+        async function loadDynamicQuestions() {
+            try {
+                const questionsRef = window.firebaseDatabase.ref(window.firebaseDatabase.db, 'questionsBank');
+                const snapshot = await window.firebaseDatabase.get(questionsRef);
+                dynamicQuestions = [];
+                if (snapshot.exists()) {
+                    snapshot.forEach((childSnapshot) => {
+                        dynamicQuestions.push({ id: childSnapshot.key, ...childSnapshot.val() });
+                    });
+                    logDebug(`${dynamicQuestions.length} ${CONSTANTS.UI_TEXT.DYNAMIC_QUESTIONS_LOADED}`);
+                } else {
+                    logDebug(CONSTANTS.UI_TEXT.NO_DYNAMIC_QUESTIONS_IN_DB);
+                }
+            } catch (error) {
+                showFeedback(`${CONSTANTS.UI_TEXT.LOADING_DYNAMIC_QUESTIONS_ERROR}${error.message}`, 'error');
+                console.error("Error loading dynamic questions:", error);
+            }
+            // dynamicQuestions yüklendikten sonra listeyi ve sayacı güncelle
+            if (isAdmin) { // Sadece admin giriş yapmışsa render et
+                 renderExistingQuestions();
+            }
+        }
+
+        // Yeni soruyu Firebase'e kaydet
+        async function handleSaveOrUpdateQuestion() {
+            const questionText = domElements.newQuestionText.value.trim();
+            const options = [
+                domElements.newOption1.value.trim(),
+                domElements.newOption2.value.trim(),
+                domElements.newOption3.value.trim(),
+                domElements.newOption4.value.trim()
+            ];
+            const correctAnswerIndex = parseInt(domElements.newCorrectAnswerIndex.value, 10);
+            const imageUrl = domElements.newQuestionImageUrl.value.trim();
+
+            // Basit Doğrulama
+            if (!questionText) {
+                domElements.addQuestionStatus.textContent = CONSTANTS.UI_TEXT.ADD_QUESTION_EMPTY_TEXT;
+                domElements.addQuestionStatus.style.color = "red";
+                return;
+            }
+            if (options.some(opt => !opt)) {
+                domElements.addQuestionStatus.textContent = CONSTANTS.UI_TEXT.ADD_QUESTION_EMPTY_OPTIONS;
+                domElements.addQuestionStatus.style.color = "red";
+                return;
+            }
+            if (isNaN(correctAnswerIndex) || correctAnswerIndex < 0 || correctAnswerIndex > 3) {
+                domElements.addQuestionStatus.textContent = CONSTANTS.UI_TEXT.ADD_QUESTION_INVALID_ANSWER;
+                domElements.addQuestionStatus.style.color = "red";
+                return;
+            }
+
+            const correctAnswer = options[correctAnswerIndex];
+
+            const questionData = {
+                question: questionText,
+                options: options,
+                answer: correctAnswer,
+                timestamp: Date.now(),
+                imageUrl: imageUrl || null
+            };
+
+            try {
+                domElements.saveQuestionBtn.disabled = true;
+                domElements.saveQuestionBtn.textContent = CONSTANTS.UI_TEXT.SAVING_QUESTION_TEXT;
+
+                if (editingQuestionId) {
+                    // Varolan soruyu güncelle
+                    const questionRef = window.firebaseDatabase.ref(window.firebaseDatabase.db, `questionsBank/${editingQuestionId}`);
+                    await window.firebaseDatabase.set(questionRef, questionData);
+                    domElements.addQuestionStatus.textContent = CONSTANTS.UI_TEXT.QUESTION_UPDATED_SUCCESS;
+                    domElements.addQuestionStatus.style.color = "green";
+                } else {
+                    // Yeni soru ekle
+                    const questionsRef = window.firebaseDatabase.ref(window.firebaseDatabase.db, 'questionsBank');
+                    const newQuestionRef = window.firebaseDatabase.push(questionsRef);
+                    await window.firebaseDatabase.set(newQuestionRef, questionData);
+                    domElements.addQuestionStatus.textContent = CONSTANTS.UI_TEXT.QUESTION_ADDED_SUCCESS;
+                    domElements.addQuestionStatus.style.color = "green";
+                }
+
+                // Formu ve durumu sıfırla
+                domElements.newQuestionText.value = '';
+                domElements.newOption1.value = '';
+                domElements.newOption2.value = '';
+                domElements.newOption3.value = '';
+                domElements.newOption4.value = '';
+                domElements.newCorrectAnswerIndex.value = "0";
+                if (domElements.newQuestionImageUrl) domElements.newQuestionImageUrl.value = '';
+                editingQuestionId = null; // Düzenleme modundan çık
+                
+                await loadDynamicQuestions(); // Soru listesini yenile
+
+            } catch (error) {
+                const errorMessage = editingQuestionId ? CONSTANTS.UI_TEXT.QUESTION_UPDATE_ERROR : CONSTANTS.UI_TEXT.QUESTION_ADD_ERROR;
+                domElements.addQuestionStatus.textContent = `${errorMessage}${error.message}`;
+                domElements.addQuestionStatus.style.color = "red";
+                console.error("Error saving/updating question:", error);
+                showFeedback(`${errorMessage}${error.message}`, 'error');
+            } finally {
+                domElements.saveQuestionBtn.disabled = false;
+                domElements.saveQuestionBtn.textContent = "Soruyu Kaydet"; // Her zaman "Kaydet"e dön
+                // Durum mesajını bir süre sonra temizle (isteğe bağlı)
+                setTimeout(() => {
+                    if (domElements.addQuestionStatus) domElements.addQuestionStatus.textContent = '';
+                }, 3000); 
+            }
+        }
+
+        // Mevcut soruları admin panelinde göster
+        function renderExistingQuestions() {
+            if (!isAdmin || !domElements.existingQuestionsList) {
+                if (domElements.existingQuestionsList) domElements.existingQuestionsList.innerHTML = '';
+                const countElement = document.getElementById('dynamicQuestionCount');
+                if (countElement) countElement.textContent = '0'; // Reset count if not admin or list doesn't exist
+                return;
+            }
+            
+            const countElement = document.getElementById('dynamicQuestionCount');
+            if (countElement) countElement.textContent = dynamicQuestions.length;
+
+            if (dynamicQuestions.length === 0) {
+                domElements.existingQuestionsList.innerHTML = `<p style="font-size:13px; color: #bdc3c7; text-align:center;">${CONSTANTS.UI_TEXT.NO_DYNAMIC_QUESTIONS}</p>`;
+                return;
+            }
+
+            let questionsHTML = '<ul class="existing-questions-ul">';
+            [...dynamicQuestions].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)).forEach(q => {
+                questionsHTML += `
+                    <li data-question-id="${q.id}">
+                        <div class="question-text"><strong>Soru:</strong> ${q.question}</div>
+                        ${q.imageUrl ? `<div class="question-image-preview-admin"><img src="${q.imageUrl}" alt="Görsel Önizleme"></div>` : ''}
+                        <div class="question-options">
+                            <strong>Seçenekler:</strong> 
+                            <ol type="A">
+                                ${q.options.map(opt => `<li>${opt === q.answer ? `<strong>${opt} (Doğru)</strong>` : opt}</li>`).join('')}
+                            </ol>
+                        </div>
+                        <button class="admin-btn delete-question-btn" data-id="${q.id}">Bu Soruyu Sil</button>
+                        <button class="admin-btn edit-question-btn" data-id="${q.id}">Bu Soruyu Düzenle</button>
+                    </li>
+                `;
+            });
+            questionsHTML += '</ul>';
+            domElements.existingQuestionsList.innerHTML = questionsHTML;
+
+            document.querySelectorAll('.delete-question-btn').forEach(button => {
+                const newButton = button.cloneNode(true);
+                button.parentNode.replaceChild(newButton, button);
+                newButton.addEventListener('click', (e) => {
+                    const questionId = e.target.dataset.id;
+                    deleteQuestionFromFirebase(questionId);
+                });
+            });
+
+            document.querySelectorAll('.edit-question-btn').forEach(button => {
+                const newButton = button.cloneNode(true);
+                button.parentNode.replaceChild(newButton, button);
+                newButton.addEventListener('click', (e) => {
+                    const questionId = e.target.dataset.id;
+                    populateFormForEdit(questionId); // Changed to call populateFormForEdit
+                });
+            });
+        }
+
+        // Soruyu Firebase'den sil
+        async function deleteQuestionFromFirebase(questionId) {
+            if (!questionId) return;
+            if (confirm(CONSTANTS.UI_TEXT.CONFIRM_DELETE_QUESTION)) {
+                try {
+                    const questionRef = window.firebaseDatabase.ref(window.firebaseDatabase.db, `questionsBank/${questionId}`);
+                    await window.firebaseDatabase.remove(questionRef);
+                    logDebug(`Soru ID ${questionId} Firebase'den silindi.`);
+                    showFeedback(CONSTANTS.UI_TEXT.QUESTION_DELETED_SUCCESS, "success");
+                    await loadDynamicQuestions();
+                } catch (error) {
+                    showFeedback(`${CONSTANTS.UI_TEXT.QUESTION_DELETE_ERROR}${error.message}`, "error");
+                    console.error("Error deleting question from Firebase:", error);
+                }
+            }
+        }
+
+        // Admin panelindeki formu düzenleme için doldur
+        function populateFormForEdit(questionId) {
+            const questionToEdit = dynamicQuestions.find(q => q.id === questionId);
+            if (!questionToEdit) {
+                showFeedback("Düzenlenecek soru bulunamadı!", "error");
+                return;
+            }
+
+            domElements.newQuestionText.value = questionToEdit.question;
+            domElements.newOption1.value = questionToEdit.options[0] || '';
+            domElements.newOption2.value = questionToEdit.options[1] || '';
+            domElements.newOption3.value = questionToEdit.options[2] || '';
+            domElements.newOption4.value = questionToEdit.options[3] || '';
+            domElements.newQuestionImageUrl.value = questionToEdit.imageUrl || '';
+
+            const correctAnswerIndex = questionToEdit.options.indexOf(questionToEdit.answer);
+            if (correctAnswerIndex !== -1) {
+                domElements.newCorrectAnswerIndex.value = correctAnswerIndex.toString();
+            } else {
+                // Fallback or error if answer not in options - should not happen with current structure
+                domElements.newCorrectAnswerIndex.value = "0"; 
+            }
+
+            editingQuestionId = questionId;
+            domElements.saveQuestionBtn.textContent = "Soruyu Güncelle";
+            domElements.addQuestionStatus.textContent = `Şu soruyu düzenliyorsunuz: ${questionToEdit.question.substring(0,30)}...`;
+            domElements.addQuestionStatus.style.color = "#007bff"; // Blue color for info
+
+            // Formun olduğu yere scroll et (opsiyonel, kullanıcı deneyimi için)
+            domElements.addQuestionForm.scrollIntoView({ behavior: 'smooth' });
+            domElements.newQuestionText.focus();
         }
 
         // SAYFA YÜKLENDİĞİNDE
         document.addEventListener('DOMContentLoaded', initApp);
+
+        function showQuestion(index) {
+            try {
+                const question = questions[index];
+                if (!question) return;
+
+                // Soru metnini göster
+                domElements.question.textContent = question.question;
+
+                // Görsel kontrolü
+                const imageContainer = document.getElementById('questionImageContainer');
+                const questionImage = document.getElementById('questionImage');
+
+                if (question.imageUrl && question.imageUrl.trim()) {
+                    imageContainer.style.display = 'block';
+                    questionImage.src = question.imageUrl;
+                } else {
+                    imageContainer.style.display = 'none';
+                    questionImage.src = '';
+                }
+
+                // Seçenekleri göster
+                domElements.options.innerHTML = '';
+                question.options.forEach((option, i) => {
+                    const button = document.createElement('button');
+                    button.className = 'option';
+                    button.textContent = option;
+                    button.onclick = () => selectAnswer(i);
+                    
+                    if (userAnswers[index] !== undefined) {
+                        button.classList.add('disabled');
+                        if (i === userAnswers[index]) {
+                            button.classList.add(
+                                option === question.answer ? 'correct' : 'wrong'
+                            );
+                        }
+                        if (option === question.answer) {
+                            button.classList.add('correct');
+                        }
+                    }
+                    
+                    domElements.options.appendChild(button);
+                });
+
+                // İlerleme çubuğunu güncelle
+                updateProgressBar();
+                
+                // Navigasyon butonlarını güncelle
+                updateNavigationButtons();
+                
+            } catch(err) {
+                showFeedback('Soru yüklenirken hata oluştu: ' + err.message, 'error');
+            }
+        }
     </script>
 </body>
-</html>
+</html> 
